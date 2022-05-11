@@ -1,0 +1,21 @@
+{
+	"id": "58537e9b-1624-427e-bc96-c51929551def",
+	"name": "Videothek",
+	"timestamp": "2022-05-11T08:52:03.872Z",
+	"collection_id": "d94bd6d2-2f9c-4dfc-acf0-3aa4ee7d07cf",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"totalFail": 0,
+	"results": [],
+	"count": 1,
+	"totalTime": 0,
+	"collection": {
+		"requests": [
+			{
+				"id": "cd327cd2-a948-4ec0-96cd-7de2c45ef9c5",
+				"method": "GET"
+			}
+		]
+	}
+}
