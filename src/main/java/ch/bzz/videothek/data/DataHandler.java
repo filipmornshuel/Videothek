@@ -55,13 +55,13 @@ public class DataHandler {
      * @return the Book (null=not found)
      */
     public Film readFilmByUUID(String filmUUID) {
-        Film book = null;
+        Film film = null;
         for (Film entry : getFilmList()) {
             if (entry.getFilmUUID().equals(filmUUID)) {
-                book = entry;
+                film = entry;
             }
         }
-        return book;
+        return film;
     }
 
     /**
@@ -74,14 +74,14 @@ public class DataHandler {
     }
 
     /**
-     * reads a publisher by its uuid
-     * @param publisherUUID
-     * @return the Publisher (null=not found)
+     * reads a producer by its uuid
+     * @param producerUUID
+     * @return the Producer (null=not found)
      */
-    public Producer readProducersByUUID(String publisherUUID) {
+    public Producer readProducersByUUID(String producerUUID) {
         Producer producer = null;
         for (Producer entry : getProducerList()) {
-            if (entry.getProducerUUID().equals(publisherUUID)) {
+            if (entry.getProducerUUID().equals(producerUUID)) {
                 producer = entry;
             }
         }
@@ -114,7 +114,7 @@ public class DataHandler {
         try {
             byte[] jsonData = Files.readAllBytes(
                     Paths.get(
-                            Config.getProperty("publisherJSON")
+                            Config.getProperty("producerJSON")
                     )
             );
             ObjectMapper objectMapper = new ObjectMapper();

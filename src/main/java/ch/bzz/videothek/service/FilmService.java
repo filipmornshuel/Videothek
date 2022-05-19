@@ -35,7 +35,7 @@ public class FilmService {
     @GET
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response readBook(
+    public Response readFilm(
             @QueryParam("uuid") String filmUUID
     ){
         if (filmUUID.isEmpty()){
@@ -53,4 +53,5 @@ public class FilmService {
             }
         }
     }
+
 }
