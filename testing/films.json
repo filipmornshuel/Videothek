@@ -1,0 +1,38 @@
+[
+ {
+  "filmUUID": "3247c340-c712-402e-b400-0a23a9368c97",
+  "title": "Spider-Man NWH",
+  "producerUUID": "ecd86148-5341-43c6-81ed-f3f4595965dc",
+  "price": 29.95,
+  "publishDate": "2021-12-14",
+  "lenth": 160,
+  "ean": 4030521759138
+ },
+ {
+  "filmUUID": "db117daa-e295-4597-abcd-a69496797dc0",
+  "title": "Spider-Man FRH",
+  "producerUUID": "606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
+  "price": 31.95,
+  "publishDate": "2018-08-23",
+  "lenth": 140,
+  "ean": 4030521755963
+ },
+ {
+  "filmUUID": "c746a291-0ef9-4b2a-8268-392b12d636bd",
+  "title": "Spider-Man HC",
+  "producerUUID": "06fc334d-7b02-434f-9222-6544d30d8832",
+  "price": 18.95,
+  "publishDate": "2017-11-23",
+  "lenth": 128,
+  "ean": 4030521747913
+ },
+ {
+  "filmUUID": "73bd4187-a5b7-4864-be79-327bb8ed43bf",
+  "title": "The Amazing Spider-Man 1",
+  "producerUUID": "ecd86148-5341-43c6-81ed-f3f4595965dc",
+  "price": 12.5,
+  "publishDate": "2012-07-17",
+  "lenth": 158,
+  "ean": 4030521737457
+ }
+]
