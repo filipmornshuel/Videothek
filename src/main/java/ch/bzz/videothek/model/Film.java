@@ -1,5 +1,14 @@
 package ch.bzz.videothek.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import sun.rmi.server.UnicastServerRef;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -8,13 +17,25 @@ import java.time.LocalDate;
  */
 
 public class Film {
+
     private String filmUUID;
     private String title;
     private Producer producer;
-    private BigDecimal price;
+
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate publishDate;
+
+
+    private BigDecimal price;
+
+
     private String lenth;
+
+
     private String ean;
+
 
     public String getFilmUUID() {
         return filmUUID;
@@ -24,6 +45,7 @@ public class Film {
         this.filmUUID = filmUUID;
     }
 
+
     public String getTitle() {
         return title;
     }
@@ -31,6 +53,7 @@ public class Film {
     public void setTitle(String title) {
         this.title = title;
     }
+
 
     public Producer getProducer() {
         return producer;
@@ -56,6 +79,7 @@ public class Film {
         this.publishDate = publishDate;
     }
 
+
     public String getLenth() {
         return lenth;
     }
@@ -64,6 +88,8 @@ public class Film {
         this.lenth = lenth;
     }
 
+
+
     public String getEan() {
         return ean;
     }
@@ -71,4 +97,5 @@ public class Film {
     public void setEan(String ean) {
         this.ean = ean;
     }
+
 }

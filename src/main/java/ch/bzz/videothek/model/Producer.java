@@ -1,5 +1,7 @@
 package ch.bzz.videothek.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 /**
@@ -9,6 +11,7 @@ import java.util.List;
 public class Producer {
     private String producerUUID;
     private String producer;
+    @JsonIgnore
     private List<Film> filmList;
 
     public String getProducerUUID() {

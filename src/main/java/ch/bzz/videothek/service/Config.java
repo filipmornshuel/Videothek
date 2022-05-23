@@ -18,7 +18,7 @@ import java.util.Set;
 @ApplicationPath("/resource")
 
 public class Config extends Application {
-    private static final String PROPERTIES_PATH = "/home/bzz/webapp/filmList.properties";
+    private static final String PROPERTIES_PATH = "/home/bzz/webapp/filmLists.properties";
     private static Properties properties = null;
 
     /**
@@ -30,6 +30,7 @@ public class Config extends Application {
     public Set<Class<?>> getClasses() {
         HashSet providers = new HashSet<Class<?>>();
         providers.add(FilmService.class);
+        providers.add(ProducerService.class);
         providers.add(TestService.class);
         return providers;
     }
