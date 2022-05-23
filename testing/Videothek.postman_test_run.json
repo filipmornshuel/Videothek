@@ -1,0 +1,176 @@
+{
+	"id": "ed71f20c-c7d4-44d7-a73e-0f5c26b10299",
+	"name": "Videothek",
+	"timestamp": "2022-05-23T20:56:57.473Z",
+	"collection_id": "d94bd6d2-2f9c-4dfc-acf0-3aa4ee7d07cf",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 6,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "cd327cd2-a948-4ec0-96cd-7de2c45ef9c5",
+			"name": "0.1 TestService",
+			"url": "http://localhost:8080/Videothek-1.0/resource/test/test",
+			"time": 31,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				31
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e5037338-a08f-492a-bd60-8f87c0f141c2",
+			"name": "1.0 list all films",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/list",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "871567bc-101e-4d87-83c4-a961d4a48529",
+			"name": "1.1 read film",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/read?uuid=3247c340-c712-402e-b400-0a23a9368c97",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "7fbf499c-6764-46fb-afa8-3280be03b927",
+			"name": "1.2 read unknown film",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/read?uuid=3247c340-ffff-402e-b400-0a23a9368c97",
+			"time": 8,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "e07a75a9-662a-47fe-9332-0e7de9644233",
+			"name": "1.3 read film with invalid uuid",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/read?uuid=3247c340-xyzq-402e-b400-0a23a9368c97",
+			"time": 48,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				48
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 107,
+	"collection": {
+		"requests": [
+			{
+				"id": "cd327cd2-a948-4ec0-96cd-7de2c45ef9c5",
+				"method": "GET"
+			},
+			{
+				"id": "e5037338-a08f-492a-bd60-8f87c0f141c2",
+				"method": "GET"
+			},
+			{
+				"id": "871567bc-101e-4d87-83c4-a961d4a48529",
+				"method": "GET"
+			},
+			{
+				"id": "7fbf499c-6764-46fb-afa8-3280be03b927",
+				"method": "GET"
+			},
+			{
+				"id": "e07a75a9-662a-47fe-9332-0e7de9644233",
+				"method": "GET"
+			}
+		]
+	}
+}
