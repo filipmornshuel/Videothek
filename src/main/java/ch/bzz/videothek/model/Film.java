@@ -31,7 +31,7 @@ public class Film {
     private BigDecimal price;
 
 
-    private String lenth;
+    private Integer lenth;
 
 
     private String ean;
@@ -80,11 +80,11 @@ public class Film {
     }
 
 
-    public String getLenth() {
+    public Integer getLenth() {
         return lenth;
     }
 
-    public void setLenth(String lenth) {
+    public void setLenth(Integer lenth) {
         this.lenth = lenth;
     }
 
