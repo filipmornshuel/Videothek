@@ -47,17 +47,17 @@ public class DataHandler {
 
 
     /**
-     * reads all books
-     * @return list of books
+     * reads all films
+     * @return list of films
      */
     public List<Film> readAllFilms() {
         return getFilmList();
     }
 
     /**
-     * reads a book by its uuid
+     * reads a film by its uuid
      * @param filmUUID
-     * @return the Book (null=not found)
+     * @return the Film (null=not found)
      */
     public Film readFilmByUUID(String filmUUID) {
         Film film = null;
@@ -70,8 +70,8 @@ public class DataHandler {
     }
 
     /**
-     * reads all Publishers
-     * @return list of publishers
+     * reads all Producers
+     * @return list of producers
      */
     public List<Producer> readAllProducers() {
 
@@ -94,17 +94,17 @@ public class DataHandler {
     }
 
     /**
-     * reads all Publishers
-     * @return list of publishers
+     * reads all Genres
+     * @return list of genres
      */
     public List<Genre> readAllGenres() {
         return getGenreList();
     }
 
     /**
-     * reads a producer by its uuid
+     * reads a genre by its uuid
      * @param genreUUID
-     * @return the Producer (null=not found)
+     * @return the Genre (null=not found)
      */
     public Genre readGenresByUUID(String genreUUID) {
         Genre genre = null;
@@ -119,7 +119,7 @@ public class DataHandler {
 
 
     /**
-     * reads the books from the JSON-file
+     * reads the film from the JSON-file
      */
     private void readFilmJSON() {
         try {
@@ -138,7 +138,7 @@ public class DataHandler {
     }
 
     /**
-     * reads the publishers from the JSON-file
+     * reads the producer from the JSON-file
      */
     private void readProducerJSON() {
         try {
@@ -157,6 +157,9 @@ public class DataHandler {
         }
     }
 
+    /**
+     * reads the genre from the JSON-file
+     */
     private void readGenreJSON() {
         try {
             byte[] jsonData = Files.readAllBytes(
@@ -174,16 +177,16 @@ public class DataHandler {
         }
     }
     /**
-     * gets bookList
+     * gets filmList
      *
-     * @return value of bookList
+     * @return value of filmList
      */
     private List<Film> getFilmList() {
         return filmList;
     }
 
     /**
-     * sets bookList
+     * sets filmList
      *
      * @param filmList the value to set
      */
@@ -192,16 +195,16 @@ public class DataHandler {
     }
 
     /**
-     * gets publisherList
+     * gets producerList
      *
-     * @return value of publisherList
+     * @return value of producerList
      */
     private List<Producer> getProducerList() {
         return producerList;
     }
 
     /**
-     * sets publisherList
+     * sets producerList
      *
      * @param producerList the value to set
      */
@@ -210,24 +213,21 @@ public class DataHandler {
     }
 
     /**
-     * gets publisherList
+     * gets genreList
      *
-     * @return value of publisherList
+     * @return value of genreList
      */
     private List<Genre> getGenreList() {
         return genreList;
     }
 
     /**
-     * sets publisherList
+     * sets genreList
      *
      * @param genreList the value to set
      */
     private void setGenreList(List<Genre> genreList) {
         this.genreList = genreList;
     }
-
-
-
 
 }

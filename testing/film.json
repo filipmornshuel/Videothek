@@ -6,6 +6,10 @@
     "producerUUID": "ecd86148-5341-43c6-81ed-f3f4595965dc",
     "producer": "Sony Pictures Germany"
     },
+  "genre": {
+  "genreUUID": "505dd5b5-7cde-2f35-24d1-fgf5c5432262",
+  "genre": "Action"
+    },
   "price": 29.95,
   "publishDate": "2021-12-14",
   "lenth": 160,
@@ -18,6 +22,10 @@
   "producerUUID": "606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
   "producer": "Marvel"
    },
+  "genre": {
+  "genreUUID": "elg83128-1321-34d6-18fe-g3g548412345",
+  "genre": "Horror"
+   },  
   "price": 31.95,
   "publishDate": "2018-08-23",
   "lenth": 140,
@@ -30,6 +38,10 @@
   "producerUUID": "06fc334d-7b02-434f-9222-6544d30d8832",
   "producer": "Bloomhouse"
     },
+  "genre": {
+  "genreUUID": "05de223e-2c03-235d-9111-4456e40f3321",
+  "genre": "Science Fiction"
+    },
   "price": 18.95,
   "publishDate": "2017-11-23",
   "lenth": 128,
@@ -41,6 +53,10 @@
   "producer": {
     "producerUUID": "ecd86148-5341-43c6-81ed-f3f4595965dc",
     "producer": "Sony Pictures Germany"
+    },
+  "genre": {
+  "genreUUID": "05de223e-2c03-235d-9111-4456e40f3321",
+  "genre": "Science Fiction"
     },
   "price": 12.5,
   "publishDate": "2012-07-17",
