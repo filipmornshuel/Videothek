@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
- * Ein Film in unserer Videothek
+ * A film in our Videothek
  */
 
 public class Film {
@@ -21,6 +21,7 @@ public class Film {
     private String filmUUID;
     private String title;
     private Producer producer;
+    private Genre genre;
 
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -98,4 +99,11 @@ public class Film {
         this.ean = ean;
     }
 
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 }

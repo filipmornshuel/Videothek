@@ -1,12 +1,14 @@
 package ch.bzz.videothek.data;
 
 import ch.bzz.videothek.model.Film;
+import ch.bzz.videothek.model.Genre;
 import ch.bzz.videothek.model.Producer;
 import ch.bzz.videothek.service.Config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class DataHandler {
     private static DataHandler instance = null;
     private List<Film> filmList;
     private List<Producer> producerList;
+    private List<Genre> genreList;
 
     /**
      * private constructor defeats instantiation
@@ -28,6 +31,8 @@ public class DataHandler {
         readProducerJSON();
         setFilmList(new ArrayList<>());
         readFilmJSON();
+        setGenreList(new ArrayList<>());
+        readGenreJSON();
     }
 
     /**
@@ -89,6 +94,31 @@ public class DataHandler {
     }
 
     /**
+     * reads all Publishers
+     * @return list of publishers
+     */
+    public List<Genre> readAllGenres() {
+        return getGenreList();
+    }
+
+    /**
+     * reads a producer by its uuid
+     * @param genreUUID
+     * @return the Producer (null=not found)
+     */
+    public Genre readGenresByUUID(String genreUUID) {
+        Genre genre = null;
+        for (Genre entry : getGenreList()) {
+            if (entry.getGenreUUID().equals(genreUUID)) {
+                genre = entry;
+            }
+        }
+        return genre;
+    }
+
+
+
+    /**
      * reads the books from the JSON-file
      */
     private void readFilmJSON() {
@@ -121,6 +151,23 @@ public class DataHandler {
             Producer[] producers = objectMapper.readValue(jsonData, Producer[].class);
             for (Producer producer : producers) {
                 getProducerList().add(producer);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void readGenreJSON() {
+        try {
+            byte[] jsonData = Files.readAllBytes(
+                    Paths.get(
+                            Config.getProperty("genreJSON")
+                    )
+            );
+            ObjectMapper objectMapper = new ObjectMapper();
+            Genre[] genres = objectMapper.readValue(jsonData, Genre[].class);
+            for (Genre genre : genres) {
+                getGenreList().add(genre);
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -161,6 +208,26 @@ public class DataHandler {
     private void setProducerList(List<Producer> producerList) {
         this.producerList = producerList;
     }
+
+    /**
+     * gets publisherList
+     *
+     * @return value of publisherList
+     */
+    private List<Genre> getGenreList() {
+        return genreList;
+    }
+
+    /**
+     * sets publisherList
+     *
+     * @param genreList the value to set
+     */
+    private void setGenreList(List<Genre> genreList) {
+        this.genreList = genreList;
+    }
+
+
 
 
 }

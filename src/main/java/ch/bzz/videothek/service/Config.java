@@ -32,6 +32,7 @@ public class Config extends Application {
         providers.add(FilmService.class);
         providers.add(ProducerService.class);
         providers.add(TestService.class);
+        providers.add(GenreService.class);
         return providers;
     }
 
