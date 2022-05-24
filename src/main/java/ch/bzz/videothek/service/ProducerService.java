@@ -13,15 +13,15 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * services for reading, adding, changing and deleting books
+ * ProducerService class
  */
 @Path("producer")
 public class ProducerService {
-    /**
-     * reads a list of all books
-     * @return books as JSON
-     */
 
+    /**
+     * a list of all producers
+     * @return producers as JSON
+     */
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
@@ -33,6 +33,11 @@ public class ProducerService {
                 .build();
     }
 
+    /**
+     * reads one producer by its uuid
+     * @param producerUUID
+     * @return response as JSON
+     */
     @GET
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)

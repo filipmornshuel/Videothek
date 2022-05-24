@@ -12,17 +12,18 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.UUID;
 
 /**
- * services for reading, adding, changing and deleting books
+ * GenreService class
  */
 @Path("genre")
 public class GenreService {
-    /**
-     * reads a list of all books
-     * @return books as JSON
-     */
 
+    /**
+     * a list of all genres
+     * @return genres as JSON
+     */
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
@@ -34,6 +35,11 @@ public class GenreService {
                 .build();
     }
 
+    /**
+     * reads one genre by its uuid
+     * @param genreUUID
+     * @return response as JSON
+     */
     @GET
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)

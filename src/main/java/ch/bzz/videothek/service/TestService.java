@@ -7,11 +7,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * test service
+ * TestService class
  */
 @Path("test")
 public class TestService {
 
+    /**
+     * a status test
+     * @return response as JSON
+     */
     @GET
     @Path("test")
     @Produces(MediaType.TEXT_PLAIN)

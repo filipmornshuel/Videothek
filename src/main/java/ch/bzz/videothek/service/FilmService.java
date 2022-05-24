@@ -12,15 +12,15 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * services for reading, adding, changing and deleting books
+ * FilmeService class
  */
 @Path("film")
 public class FilmService {
-    /**
-     * reads a list of all books
-     * @return books as JSON
-     */
 
+    /**
+     * a list of all films
+     * @return films as JSON
+     */
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
@@ -32,6 +32,11 @@ public class FilmService {
                 .build();
     }
 
+    /**
+     * reads one film by its uuid
+     * @param filmUUID
+     * @return response as JSON
+     */
     @GET
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
