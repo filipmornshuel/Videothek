@@ -25,7 +25,7 @@ public class FilmService {
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listFilms() {
-        List<Film> filmList = DataHandler.getInstance().readAllFilms();
+        List<Film> filmList = DataHandler.readAllFilms();
         return Response
                 .status(200)
                 .entity(filmList)
@@ -47,7 +47,7 @@ public class FilmService {
             new IllegalArgumentException("illegal uuid");
             return Response.status(400).entity(null).build();
         }else {
-            Film film = DataHandler.getInstance().readFilmByUUID(filmUUID);
+            Film film = DataHandler.readFilmByUUID(filmUUID);
             if (film!=null) {
                 return Response
                         .status(200)

@@ -18,39 +18,23 @@ import java.util.List;
  * reads and writes the data in the JSON-files
  */
 public class DataHandler {
-    private static DataHandler instance = null;
-    private List<Film> filmList;
-    private List<Producer> producerList;
-    private List<Genre> genreList;
+    private static List<Film> filmList;
+    private static List<Producer> producerList;
+    private static List<Genre> genreList;
 
     /**
      * private constructor defeats instantiation
      */
     private DataHandler() {
-        setProducerList(new ArrayList<>());
-        readProducerJSON();
-        setFilmList(new ArrayList<>());
-        readFilmJSON();
-        setGenreList(new ArrayList<>());
-        readGenreJSON();
+        
     }
-
-    /**
-     * gets the only instance of this class
-     * @return
-     */
-    public static DataHandler getInstance() {
-        if (instance == null)
-            instance = new DataHandler();
-        return instance;
-    }
-
+    
 
     /**
      * reads all films
      * @return list of films
      */
-    public List<Film> readAllFilms() {
+    public static List<Film> readAllFilms() {
         return getFilmList();
     }
 
@@ -59,7 +43,7 @@ public class DataHandler {
      * @param filmUUID
      * @return the Film (null=not found)
      */
-    public Film readFilmByUUID(String filmUUID) {
+    public static Film readFilmByUUID(String filmUUID) {
         Film film = null;
         for (Film entry : getFilmList()) {
             if (entry.getFilmUUID().equals(filmUUID)) {
@@ -73,7 +57,7 @@ public class DataHandler {
      * reads all Producers
      * @return list of producers
      */
-    public List<Producer> readAllProducers() {
+    public static List<Producer> readAllProducers() {
 
         return getProducerList();
     }
@@ -83,7 +67,7 @@ public class DataHandler {
      * @param producerUUID
      * @return the Producer (null=not found)
      */
-    public Producer readProducersByUUID(String producerUUID) {
+    public static Producer readProducersByUUID(String producerUUID) {
         Producer producer = null;
         for (Producer entry : getProducerList()) {
             if (entry.getProducerUUID().equals(producerUUID)) {
@@ -97,7 +81,7 @@ public class DataHandler {
      * reads all Genres
      * @return list of genres
      */
-    public List<Genre> readAllGenres() {
+    public static List<Genre> readAllGenres() {
         return getGenreList();
     }
 
@@ -106,7 +90,7 @@ public class DataHandler {
      * @param genreUUID
      * @return the Genre (null=not found)
      */
-    public Genre readGenresByUUID(String genreUUID) {
+    public static Genre readGenresByUUID(String genreUUID) {
         Genre genre = null;
         for (Genre entry : getGenreList()) {
             if (entry.getGenreUUID().equals(genreUUID)) {
@@ -121,7 +105,7 @@ public class DataHandler {
     /**
      * reads the film from the JSON-file
      */
-    private void readFilmJSON() {
+    private static void readFilmJSON() {
         try {
             String path = Config.getProperty("filmJSON");
             byte[] jsonData = Files.readAllBytes(
@@ -140,7 +124,7 @@ public class DataHandler {
     /**
      * reads the producer from the JSON-file
      */
-    private void readProducerJSON() {
+    private static void readProducerJSON() {
         try {
             byte[] jsonData = Files.readAllBytes(
                     Paths.get(
@@ -160,7 +144,7 @@ public class DataHandler {
     /**
      * reads the genre from the JSON-file
      */
-    private void readGenreJSON() {
+    private static void readGenreJSON() {
         try {
             byte[] jsonData = Files.readAllBytes(
                     Paths.get(
@@ -181,7 +165,12 @@ public class DataHandler {
      *
      * @return value of filmList
      */
-    private List<Film> getFilmList() {
+    private static List<Film> getFilmList() {
+        if (filmList == null) {
+            setFilmList(new ArrayList<>());
+            readFilmJSON(); 
+        }
+        
         return filmList;
     }
 
@@ -190,8 +179,8 @@ public class DataHandler {
      *
      * @param filmList the value to set
      */
-    private void setFilmList(List<Film> filmList) {
-        this.filmList = filmList;
+    private static void setFilmList(List<Film> filmList) {
+        DataHandler.filmList = filmList;
     }
 
     /**
@@ -199,7 +188,13 @@ public class DataHandler {
      *
      * @return value of producerList
      */
-    private List<Producer> getProducerList() {
+    private static List<Producer> getProducerList() {
+        if (producerList == null) {
+            setProducerList(new ArrayList<>());
+            readProducerJSON();
+        }
+
+       
         return producerList;
     }
 
@@ -208,8 +203,8 @@ public class DataHandler {
      *
      * @param producerList the value to set
      */
-    private void setProducerList(List<Producer> producerList) {
-        this.producerList = producerList;
+    private static void setProducerList(List<Producer> producerList) {
+        DataHandler.producerList = producerList;
     }
 
     /**
@@ -217,7 +212,11 @@ public class DataHandler {
      *
      * @return value of genreList
      */
-    private List<Genre> getGenreList() {
+    private static List<Genre> getGenreList() {
+        if (genreList == null) {
+            setGenreList(new ArrayList<>());
+            readGenreJSON();
+        }
         return genreList;
     }
 
@@ -226,8 +225,8 @@ public class DataHandler {
      *
      * @param genreList the value to set
      */
-    private void setGenreList(List<Genre> genreList) {
-        this.genreList = genreList;
+    private static void setGenreList(List<Genre> genreList) {
+        DataHandler.genreList = genreList;
     }
 
 }
