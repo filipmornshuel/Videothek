@@ -28,7 +28,7 @@ public class GenreService {
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listGenres() {
-        List<Genre> genreList = DataHandler.getInstance().readAllGenres();
+        List<Genre> genreList = DataHandler.readAllGenres();
         return Response
                 .status(200)
                 .entity(genreList)
@@ -50,7 +50,7 @@ public class GenreService {
             new IllegalArgumentException("illegal uuid");
             return Response.status(400).entity(null).build();
         }else {
-            Genre genre = DataHandler.getInstance().readGenresByUUID(genreUUID);
+            Genre genre = DataHandler.readGenresByUUID(genreUUID);
             if (genre!=null) {
                 return Response
                         .status(200)

@@ -26,7 +26,7 @@ public class ProducerService {
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listProducers() {
-        List<Producer> producerList = DataHandler.getInstance().readAllProducers();
+        List<Producer> producerList = DataHandler.readAllProducers();
         return Response
                 .status(200)
                 .entity(producerList)
@@ -48,7 +48,7 @@ public class ProducerService {
             new IllegalArgumentException("illegal uuid");
             return Response.status(400).entity(null).build();
         }else {
-            Producer producer = DataHandler.getInstance().readProducersByUUID(producerUUID);
+            Producer producer = DataHandler.readProducersByUUID(producerUUID);
             if (producer!=null) {
                 return Response
                         .status(200)
