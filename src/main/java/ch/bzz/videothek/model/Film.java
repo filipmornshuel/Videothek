@@ -1,5 +1,6 @@
 package ch.bzz.videothek.model;
 
+import ch.bzz.videothek.data.DataHandler;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -46,6 +47,45 @@ public class Film {
         this.filmUUID = filmUUID;
     }
 
+    /**
+     * gets the producerUUID from the Publisher-object
+     * @return the producerUUID
+     */
+    public String getProducerUUID() {
+        if (getProducer()== null) return null;
+        return getProducer().getProducerUUID();
+    }
+
+    /**
+     * creates a Producer-object without the filmlist
+     * @param producerUUID the key
+     */
+    public void setProducerUUID(String producerUUID) {
+        setProducer(new Producer());
+        Producer producer = DataHandler.readProducersByUUID(producerUUID);
+        getProducer().setProducerUUID(producerUUID);
+        getProducer().setProducer(producer.getProducer());
+    }
+
+    /**
+     * gets the genreUUID from the Genre-object
+     * @return the producerUUID
+     */
+    public String getGenreUUID() {
+        if (getGenre()== null) return null;
+        return getGenre().getGenreUUID();
+    }
+
+    /**
+     * creates a Genre-object without the genreList
+     * @param genreUUID the key
+     */
+    public void setGenreUUID(String genreUUID) {
+        setGenre(new Genre());
+        Genre genre = DataHandler.readGenresByUUID(genreUUID);
+        getGenre().setGenreUUID(genreUUID);
+        getGenre().setGenre(genre.getGenre());
+    }
 
     /**
      * gets the title
