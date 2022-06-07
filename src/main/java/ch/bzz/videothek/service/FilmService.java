@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
@@ -83,6 +84,10 @@ public class FilmService {
     ){
         int httpStatus = 200;
 
+        if (!DataHandler.deleteFilm(filmUUID)){
+            httpStatus = 410;
+        }
+        /*
         if (!filmUUID.isEmpty()){
 
             if (DataHandler.readFilmByUUID(filmUUID)!=null){
@@ -95,6 +100,8 @@ public class FilmService {
         }else {
             httpStatus = 400;
         }
+
+         */
         Response response = Response
                 .status(httpStatus)
                 .entity("")
@@ -104,49 +111,37 @@ public class FilmService {
 
     /**
      * updates a new film
-     * @param filmUUID the key
-     * @param title the title
      * @param producerUUID the uuid of the producer
      * @param genreUUID the uuid of the genre
-     * @param price the price
-     * @param publishDate the publishDate
-     * @param lenth the lenth
-     * @param ean the ean
      * @return Response
      */
     @PUT
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateFilm(
-            @FormParam("filmUUID") String filmUUID,
-            @FormParam("title") String title,
+            @Valid @BeanParam Film film,
             @FormParam("producerUUID") String producerUUID,
-            @FormParam("genreUUID") String genreUUID,
-            @FormParam("price") BigDecimal price,
-            //Hier mit Beans und Validierung nachfragen etvl. bei Kevin oder Jacobi
-            @FormParam("publishDate") LocalDate publishDate,
-            @FormParam("lenth") Integer lenth,
-            @FormParam("ean") String ean
+            @FormParam("genreUUID") String genreUUID
     ){
         int httpStatus = 200;
-        if (!filmUUID.isEmpty()){
-            Film film = DataHandler.readFilmByUUID(filmUUID);
-            if (film!=null){
-                film.setTitle(title);
-                film.setProducerUUID(producerUUID);
-                film.setGenreUUID(genreUUID);
-                film.setPrice(price);
-                film.setPublishDate(publishDate);
-                film.setLenth(lenth);
-                film.setEan(ean);
-                DataHandler.updateFilm();
-                httpStatus =200;
-            }else {
-                httpStatus =404;
-            }
+        Film oldFilm = DataHandler.readFilmByUUID(film.getFilmUUID());
+        if (oldFilm!=null){
+            setAttributes(
+                    oldFilm,
+                    film.getTitle(),
+                    film.getProducerUUID(),
+                    film.getGenreUUID(),
+                    film.getPrice(),
+                    film.getPublishDate(),
+                    film.getLenth(),
+                    film.getEan()
+            );
+            DataHandler.updateFilm();
+
         }else {
-            httpStatus = 400;
+            httpStatus =410;
         }
+
         Response response = Response
                 .status(httpStatus)
                 .entity("")
@@ -156,37 +151,20 @@ public class FilmService {
 
     /**
      * inserts a new film
-     * @param filmUUID
-     * @param title the title
      * @param producerUUID the uuid of the producer
      * @param genreUUID the uuid of the genre
-     * @param price the price
-     * @param publishDate the publishDate
-     * @param lenth the lenth
-     * @param ean the ean
      * @return Response
      */
     @POST
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
     public Response createFilm(
-            @FormParam("filmUUID") String filmUUID,
-            @FormParam("title") String title,
+            @Valid @BeanParam Film film,
             @FormParam("producerUUID") String producerUUID,
-            @FormParam("genreUUID") String genreUUID,
-            @FormParam("price") BigDecimal price,
-            @FormParam("publishDate") String publishDate,
-            @FormParam("lenth") Integer lenth,
-            @FormParam("ean") String ean
+            @FormParam("genreUUID") String genreUUID
     ){
         int httpStatus = 200;
-        Film film = new Film();
-        film.setTitle(title);
-        film.setProducerUUID(producerUUID);
-        film.setGenreUUID(genreUUID);
-        film.setPrice(price);
-        film.setEan(ean);
-        DataHandler.updateFilm();
+        film.setFilmUUID(UUID.randomUUID().toString());
 
         DataHandler.insertFilm(film);
 
@@ -195,6 +173,37 @@ public class FilmService {
                 .entity("")
                 .build();
         return response;
+    }
+
+    /**
+     * private method to set the attributes of the film
+     * @param film the film
+     * @param title the title
+     * @param producerUUID the producerUUID
+     * @param genreUUID the genreUUID
+     * @param price the price
+     * @param publishDate the release date
+     * @param lenth the lenth
+     * @param ean the ean
+     */
+    private void setAttributes(
+            Film film,
+            String title,
+            String producerUUID,
+            String genreUUID,
+            BigDecimal price,
+            LocalDate publishDate,
+            Integer lenth,
+            String ean
+
+    ) {
+        film.setTitle(title);
+        film.setProducerUUID(producerUUID);
+        film.setGenreUUID(genreUUID);
+        film.setPrice(price);
+        film.setPublishDate(publishDate);
+        film.setLenth(lenth);
+        film.setEan(ean);
     }
 
 }

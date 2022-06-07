@@ -10,6 +10,8 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import sun.rmi.server.UnicastServerRef;
 
+import javax.validation.constraints.*;
+import javax.ws.rs.FormParam;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -18,17 +20,39 @@ import java.time.LocalDate;
  */
 
 public class Film {
-
-    private String filmUUID;
-    private String title;
+    @JsonIgnore
     private Producer producer;
+
+    @JsonIgnore
     private Genre genre;
+
+    @FormParam("filmUUID")
+    @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
+    private String filmUUID;
+
+    @FormParam("title")
+    @NotEmpty
+    @Size(min=2, max=40)
+    private String title;
+
+
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate publishDate;
+
+    @FormParam("price")
+    @DecimalMax(value="100.00")
+    @DecimalMin(value="0.05")
     private BigDecimal price;
+
+    @FormParam("lenth")
+    @Size(min = 50, max = 400)
     private Integer lenth;
+
+    @FormParam("ean")
+    @NotEmpty
+    @Pattern(regexp = "(?<=\\s)\\d{13}(?=\\s)") // or /^[0-9]{13}$/gm also possible
     private String ean;
 
     /**

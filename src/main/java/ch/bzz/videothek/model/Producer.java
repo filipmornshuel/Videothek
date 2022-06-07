@@ -2,6 +2,10 @@ package ch.bzz.videothek.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.ws.rs.FormParam;
 import java.util.List;
 
 /**
@@ -9,8 +13,15 @@ import java.util.List;
  */
 
 public class Producer {
+    @FormParam("producerUUID")
+    @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String producerUUID;
+
+    @FormParam("producer")
+    @NotEmpty
+    @Size(min=3, max=60)
     private String producer;
+
     @JsonIgnore
     private List<Film> filmList;
 
