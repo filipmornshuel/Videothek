@@ -176,7 +176,7 @@ public class FilmService {
     }
 
     /**
-     * private method to set the attributes of the film
+     * sets the attributes for the film-object
      * @param film the film
      * @param title the title
      * @param producerUUID the producerUUID

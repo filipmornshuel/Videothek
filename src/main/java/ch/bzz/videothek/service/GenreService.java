@@ -5,6 +5,9 @@ import ch.bzz.videothek.model.Film;
 import ch.bzz.videothek.model.Genre;
 import ch.bzz.videothek.model.Producer;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -70,10 +73,16 @@ public class GenreService {
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteGenre(
+            @NotEmpty
+            @Pattern(regexp = "[8-9a-fA-F]{8}-([8-9a-fA-F]{4}-){3}[8-9a-fA-F]{12}")
             @QueryParam("uuid") String genreUUID
     ){
         int httpStatus = 200;
 
+        if (!DataHandler.deleteGenre(genreUUID)){
+            httpStatus = 410;
+        }
+        /*
         if (!genreUUID.isEmpty()){
 
             if (DataHandler.readGenresByUUID(genreUUID)!=null){
@@ -86,6 +95,8 @@ public class GenreService {
         }else {
             httpStatus = 400;
         }
+
+         */
         Response response = Response
                 .status(httpStatus)
                 .entity("")
@@ -95,7 +106,6 @@ public class GenreService {
 
     /**
      * updates a new genre
-     * @param genreUUID the key
      * @param genre the genre
      * @return Response
      */
@@ -103,22 +113,21 @@ public class GenreService {
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateGenre(
-            @FormParam("genreUUID") String genreUUID,
-            @FormParam("genre") String genre
+            @Valid @BeanParam Genre genre
     ){
         int httpStatus = 200;
-        if (!genreUUID.isEmpty()){
-            Genre genreObj = DataHandler.readGenresByUUID(genreUUID);
-            if (genreObj!=null){
-                genreObj.setGenre(genre);
-                DataHandler.updateGenre();
-                httpStatus =200;
-            }else {
-                httpStatus =404;
-            }
+        Genre oldGenre = DataHandler.readGenresByUUID(genre.getGenreUUID());
+        if (oldGenre!=null){
+            setAttributes(
+                    oldGenre,
+                    genre.getGenre()
+            );
+
+            DataHandler.updateGenre();
         }else {
-            httpStatus = 400;
+            httpStatus =410;
         }
+
         Response response = Response
                 .status(httpStatus)
                 .entity("")
@@ -128,23 +137,23 @@ public class GenreService {
 
     /**
      * inserts a new genre
-     * @param genreUUID the uuid of the genre
      * @param genre the genre
      * @return Response
      */
     @POST
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response createFilm(
-            @FormParam("genreUUID") String genreUUID,
-            @FormParam("genre") String genre
+    public Response createGenre(
+           @Valid @BeanParam Genre genre
     ){
         int httpStatus = 200;
+        genre.setGenreUUID(UUID.randomUUID().toString());
+        /*
         Genre genreObj = new Genre();
         genreObj.setGenre(genre);
         DataHandler.updateGenre();
-
-        DataHandler.insertGenre(genreObj);
+         */
+        DataHandler.insertGenre(genre);
 
         Response response = Response
                 .status(httpStatus)
@@ -153,4 +162,15 @@ public class GenreService {
         return response;
     }
 
+    /**
+     * sets the attributes for the genre-object
+     * @param genre the genre
+     * @param genreName the name of the genre
+     */
+    private void setAttributes(
+            Genre genre,
+            String genreName
+    ) {
+       genre.setGenre(genreName);
+    }
 }
