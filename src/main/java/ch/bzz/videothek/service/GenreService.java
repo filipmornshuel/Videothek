@@ -46,6 +46,8 @@ public class GenreService {
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readGenre(
+            @NotEmpty
+            @Pattern(regexp = "[8-9a-fA-F]{8}-([8-9a-fA-F]{4}-){3}[8-9a-fA-F]{12}")
             @QueryParam("uuid") String genreUUID
     ){
         if (genreUUID.isEmpty()){

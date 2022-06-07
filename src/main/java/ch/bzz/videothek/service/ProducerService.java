@@ -5,10 +5,14 @@ import ch.bzz.videothek.model.Film;
 import ch.bzz.videothek.model.Genre;
 import ch.bzz.videothek.model.Producer;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * ProducerService class
@@ -40,6 +44,8 @@ public class ProducerService {
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readProducer(
+            @NotEmpty
+            @Pattern(regexp = "[8-9a-fA-F]{8}-([8-9a-fA-F]{4}-){3}[8-9a-fA-F]{12}")
             @QueryParam("uuid") String producerUUID
     ){
         if (producerUUID.isEmpty()){
@@ -67,10 +73,16 @@ public class ProducerService {
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteProducer(
+            @NotEmpty
+            @Pattern(regexp = "[8-9a-fA-F]{8}-([8-9a-fA-F]{4}-){3}[8-9a-fA-F]{12}")
             @QueryParam("uuid") String producerUUID
     ){
         int httpStatus = 200;
 
+        if (!DataHandler.deleteProducer(producerUUID)){
+            httpStatus = 410;
+        }
+        /*
         if (!producerUUID.isEmpty()){
 
             if (DataHandler.readProducersByUUID(producerUUID)!=null){
@@ -83,6 +95,10 @@ public class ProducerService {
         }else {
             httpStatus = 400;
         }
+
+         */
+
+
         Response response = Response
                 .status(httpStatus)
                 .entity("")
@@ -92,30 +108,27 @@ public class ProducerService {
 
     /**
      * updates a new producer
-     * @param producerUUID the key
      * @param producer the producer
      * @return Response
      */
     @PUT
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response updateGenre(
-            @FormParam("producerUUID") String producerUUID,
-            @FormParam("producer") String producer
+    public Response updateProducer(
+            @Valid @BeanParam Producer producer
     ){
         int httpStatus = 200;
-        if (!producerUUID.isEmpty()){
-            Producer producerObj = DataHandler.readProducersByUUID(producerUUID);
-            if (producerObj!=null){
-                producerObj.setProducer(producer);
-                DataHandler.updateProducer();
-                httpStatus =200;
-            }else {
-                httpStatus =404;
-            }
+        Producer oldProducer = DataHandler.readProducersByUUID(producer.getProducerUUID());
+        if (oldProducer!=null){
+            setAttributes(
+                    oldProducer,
+                    producer.getProducer()
+            );
+            DataHandler.updateProducer();
         }else {
-            httpStatus = 400;
+            httpStatus =410;
         }
+
         Response response = Response
                 .status(httpStatus)
                 .entity("")
@@ -125,23 +138,25 @@ public class ProducerService {
 
     /**
      * inserts a new producer
-     * @param producerUUID the uuid of the genre
      * @param producer the producer
      * @return Response
      */
     @POST
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response createFilm(
-            @FormParam("producerUUID") String producerUUID,
-            @FormParam("producer") String producer
+    public Response createProducer(
+            @Valid @BeanParam Producer producer
     ){
         int httpStatus = 200;
+        producer.setProducerUUID(UUID.randomUUID().toString());
+        /*
         Producer producerObj = new Producer();
         producerObj.setProducer(producer);
         DataHandler.updateProducer();
 
-        DataHandler.insertProducer(producerObj);
+         */
+
+        DataHandler.insertProducer(producer);
 
         Response response = Response
                 .status(httpStatus)
@@ -150,4 +165,15 @@ public class ProducerService {
         return response;
     }
 
+    /**
+     * sets the attributes for the producer-object
+     * @param producer the producer
+     * @param producerName the name of the producer
+     */
+    private void setAttributes(
+            Producer producer,
+            String producerName
+    ) {
+        producer.setProducer(producerName);
+    }
 }
