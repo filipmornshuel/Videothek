@@ -47,9 +47,15 @@ public class GenreService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response readGenre(
             @NotEmpty
-            @Pattern(regexp = "[8-9a-fA-F]{8}-([8-9a-fA-F]{4}-){3}[8-9a-fA-F]{12}")
+            @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String genreUUID
     ){
+        int httpsStatus = 200;
+        Genre genre = DataHandler.readGenresByUUID(genreUUID);
+        if (genre ==null){
+            httpsStatus = 410;
+        }
+        /*
         if (genreUUID.isEmpty()){
             new IllegalArgumentException("illegal uuid");
             return Response.status(400).entity(null).build();
@@ -64,6 +70,12 @@ public class GenreService {
                 return Response.status(404).entity(genre).build();
             }
         }
+
+         */
+        return Response
+                .status(httpsStatus)
+                .entity(genre)
+                .build();
     }
 
     /**
@@ -76,7 +88,7 @@ public class GenreService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteGenre(
             @NotEmpty
-            @Pattern(regexp = "[8-9a-fA-F]{8}-([8-9a-fA-F]{4}-){3}[8-9a-fA-F]{12}")
+            @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String genreUUID
     ){
         int httpStatus = 200;

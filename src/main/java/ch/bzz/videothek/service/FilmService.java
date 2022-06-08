@@ -50,7 +50,7 @@ public class FilmService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response readFilm(
             @NotEmpty
-            @Pattern(regexp = "[8-9a-fA-F]{8}-([8-9a-fA-F]{4}-){3}[8-9a-fA-F]{12}")
+            @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String filmUUID
     ){
         if (filmUUID.isEmpty()){
@@ -79,7 +79,7 @@ public class FilmService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteFilm(
             @NotEmpty
-            @Pattern(regexp = "[8-9a-fA-F]{8}-([8-9a-fA-F]{4}-){3}[8-9a-fA-F]{12}")
+            @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String filmUUID
     ){
         int httpStatus = 200;
@@ -87,6 +87,7 @@ public class FilmService {
         if (!DataHandler.deleteFilm(filmUUID)){
             httpStatus = 410;
         }
+
         /*
         if (!filmUUID.isEmpty()){
 
@@ -100,8 +101,8 @@ public class FilmService {
         }else {
             httpStatus = 400;
         }
+        */
 
-         */
         Response response = Response
                 .status(httpStatus)
                 .entity("")

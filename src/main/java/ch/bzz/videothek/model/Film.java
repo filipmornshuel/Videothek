@@ -36,6 +36,7 @@ public class Film {
     private String title;
 
 
+    @FormParam("publishDate")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -47,7 +48,8 @@ public class Film {
     private BigDecimal price;
 
     @FormParam("lenth")
-    @Size(min = 50, max = 400)
+    @DecimalMax(value = "400")
+    @DecimalMin(value = "3")
     private Integer lenth;
 
     @FormParam("ean")

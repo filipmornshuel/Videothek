@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import javax.ws.rs.Produces;
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
@@ -32,7 +33,13 @@ public class DataHandler {
     private DataHandler() {
         
     }
-    
+
+    public static void initLists(){
+        DataHandler.setFilmList(null);
+        DataHandler.setProducerList(null);
+        DataHandler.setGenreList(null);
+    }
+
 
     /**
      * reads all films
