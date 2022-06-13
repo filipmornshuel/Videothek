@@ -255,10 +255,9 @@ public class DataHandler {
      */
     private static void readProducerJSON() {
         try {
+            String path = Config.getProperty("producerJSON");
             byte[] jsonData = Files.readAllBytes(
-                    Paths.get(
-                            Config.getProperty("producerJSON")
-                    )
+                    Paths.get(path)
             );
             ObjectMapper objectMapper = new ObjectMapper();
             Producer[] producers = objectMapper.readValue(jsonData, Producer[].class);
@@ -294,10 +293,10 @@ public class DataHandler {
      */
     private static void readGenreJSON() {
         try {
+            String path = Config.getProperty("genreJSON");
+
             byte[] jsonData = Files.readAllBytes(
-                    Paths.get(
-                            Config.getProperty("genreJSON")
-                    )
+                    Paths.get(path)
             );
             ObjectMapper objectMapper = new ObjectMapper();
             Genre[] genres = objectMapper.readValue(jsonData, Genre[].class);

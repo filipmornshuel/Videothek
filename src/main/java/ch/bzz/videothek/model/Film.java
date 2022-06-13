@@ -20,12 +20,7 @@ import java.time.LocalDate;
  */
 
 public class Film {
-    @JsonIgnore
-    private Producer producer;
-
-    @JsonIgnore
-    private Genre genre;
-
+    //Maybe it causes an error... to DO!
     @FormParam("filmUUID")
     @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String filmUUID;
@@ -35,6 +30,17 @@ public class Film {
     @Size(min=2, max=40)
     private String title;
 
+    @FormParam("producerUUID")
+    private String producerUUID;
+
+    @FormParam("genreUUID")
+    private String genreUUID;
+
+    @JsonIgnore
+    private Producer producer;
+
+    @JsonIgnore
+    private Genre genre;
 
     @FormParam("publishDate")
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -48,13 +54,13 @@ public class Film {
     private BigDecimal price;
 
     @FormParam("lenth")
+    @DecimalMin(value = "5")
     @DecimalMax(value = "400")
-    @DecimalMin(value = "3")
     private Integer lenth;
 
     @FormParam("ean")
     @NotEmpty
-    @Pattern(regexp = "(?<=\\s)\\d{13}(?=\\s)") // or /^[0-9]{13}$/gm also possible
+    @Pattern(regexp = "[0-9]{13}") // or /^[0-9]{13}$/gm also possible
     private String ean;
 
     /**
@@ -179,6 +185,10 @@ public class Film {
         this.publishDate = publishDate;
     }
 
+    public void setPublishDateWithString(String publish){
+        this.publishDate = LocalDate.parse(publish);
+    }
+
 
     /**
      * gets the lenth
@@ -228,4 +238,7 @@ public class Film {
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
+
+
+
 }

@@ -11,6 +11,7 @@ import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.nio.channels.ScatteringByteChannel;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,20 +49,23 @@ public class ProducerService {
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String producerUUID
     ){
-        if (producerUUID.isEmpty()){
-            new IllegalArgumentException("illegal uuid");
-            return Response.status(400).entity(null).build();
-        }else {
-            Producer producer = DataHandler.readProducersByUUID(producerUUID);
-            if (producer!=null) {
-                return Response
-                        .status(200)
-                        .entity(producer)
-                        .build();
+        Producer producer = null;
+        int status;
+        try {
+            producer = DataHandler.readProducersByUUID(producerUUID);
+            if (producer == null){
+                status = 404;
             }else {
-                return Response.status(404).entity(producer).build();
+                status = 200;
             }
+        }catch (IllegalArgumentException argEx){
+            status = 400;
         }
+
+        return Response
+                .status(status)
+                .entity(producer)
+                .build();
     }
 
     /**
@@ -82,21 +86,6 @@ public class ProducerService {
         if (!DataHandler.deleteProducer(producerUUID)){
             httpStatus = 410;
         }
-        /*
-        if (!producerUUID.isEmpty()){
-
-            if (DataHandler.readProducersByUUID(producerUUID)!=null){
-                DataHandler.deleteProducer(producerUUID);
-                httpStatus = 200;
-            }else {
-                httpStatus = 404;
-            }
-
-        }else {
-            httpStatus = 400;
-        }
-
-         */
 
 
         Response response = Response
@@ -120,10 +109,10 @@ public class ProducerService {
         int httpStatus = 200;
         Producer oldProducer = DataHandler.readProducersByUUID(producer.getProducerUUID());
         if (oldProducer!=null){
-            setAttributes(
-                    oldProducer,
-                    producer.getProducer()
-            );
+            oldProducer.setProducer(producer.getProducer());
+
+            oldProducer.setFilmList(producer.getFilmList());
+
             DataHandler.updateProducer();
         }else {
             httpStatus =410;
@@ -149,12 +138,6 @@ public class ProducerService {
     ){
         int httpStatus = 200;
         producer.setProducerUUID(UUID.randomUUID().toString());
-        /*
-        Producer producerObj = new Producer();
-        producerObj.setProducer(producer);
-        DataHandler.updateProducer();
-
-         */
 
         DataHandler.insertProducer(producer);
 
@@ -165,15 +148,5 @@ public class ProducerService {
         return response;
     }
 
-    /**
-     * sets the attributes for the producer-object
-     * @param producer the producer
-     * @param producerName the name of the producer
-     */
-    private void setAttributes(
-            Producer producer,
-            String producerName
-    ) {
-        producer.setProducer(producerName);
-    }
+
 }

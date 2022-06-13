@@ -50,30 +50,21 @@ public class GenreService {
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String genreUUID
     ){
-        int httpsStatus = 200;
-        Genre genre = DataHandler.readGenresByUUID(genreUUID);
-        if (genre ==null){
-            httpsStatus = 410;
-        }
-        /*
-        if (genreUUID.isEmpty()){
-            new IllegalArgumentException("illegal uuid");
-            return Response.status(400).entity(null).build();
-        }else {
-            Genre genre = DataHandler.readGenresByUUID(genreUUID);
-            if (genre!=null) {
-                return Response
-                        .status(200)
-                        .entity(genre)
-                        .build();
+        Genre genre = null;
+        int status;
+        try {
+            genre = DataHandler.readGenresByUUID(genreUUID);
+            if (genre == null){
+                status = 404;
             }else {
-                return Response.status(404).entity(genre).build();
+                status = 200;
             }
+        }catch (IllegalArgumentException argEx){
+            status = 400;
         }
 
-         */
         return Response
-                .status(httpsStatus)
+                .status(status)
                 .entity(genre)
                 .build();
     }
@@ -96,21 +87,7 @@ public class GenreService {
         if (!DataHandler.deleteGenre(genreUUID)){
             httpStatus = 410;
         }
-        /*
-        if (!genreUUID.isEmpty()){
 
-            if (DataHandler.readGenresByUUID(genreUUID)!=null){
-                DataHandler.deleteGenre(genreUUID);
-                httpStatus = 200;
-            }else {
-                httpStatus = 404;
-            }
-
-        }else {
-            httpStatus = 400;
-        }
-
-         */
         Response response = Response
                 .status(httpStatus)
                 .entity("")
@@ -132,10 +109,7 @@ public class GenreService {
         int httpStatus = 200;
         Genre oldGenre = DataHandler.readGenresByUUID(genre.getGenreUUID());
         if (oldGenre!=null){
-            setAttributes(
-                    oldGenre,
-                    genre.getGenre()
-            );
+           oldGenre.setGenre(genre.getGenre());
 
             DataHandler.updateGenre();
         }else {
@@ -162,11 +136,7 @@ public class GenreService {
     ){
         int httpStatus = 200;
         genre.setGenreUUID(UUID.randomUUID().toString());
-        /*
-        Genre genreObj = new Genre();
-        genreObj.setGenre(genre);
-        DataHandler.updateGenre();
-         */
+
         DataHandler.insertGenre(genre);
 
         Response response = Response
@@ -176,15 +146,4 @@ public class GenreService {
         return response;
     }
 
-    /**
-     * sets the attributes for the genre-object
-     * @param genre the genre
-     * @param genreName the name of the genre
-     */
-    private void setAttributes(
-            Genre genre,
-            String genreName
-    ) {
-       genre.setGenre(genreName);
-    }
 }

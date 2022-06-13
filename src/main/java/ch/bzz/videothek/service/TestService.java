@@ -46,37 +46,25 @@ public class TestService {
             String filename = path.getFileName().toString();
             String folder = path.getParent().toString();
 
-
-
-            byte[] filmJSON = Files.readAllBytes(Paths.get(folder, "backup", filename));
+            byte[] filmJSON = Files.readAllBytes(Paths.get(folder, "Backups", filename));
             FileOutputStream fileOutputStream = new FileOutputStream(Config.getProperty("filmJSON"));
             fileOutputStream.write(filmJSON);
-
-
-
 
 
             path = Paths.get(Config.getProperty("producerJSON"));
             filename = path.getFileName().toString();
             folder = path.getParent().toString();
 
-
-
-            byte[] producerJSON = Files.readAllBytes(Paths.get(folder, "backup", filename));
+            byte[] producerJSON = Files.readAllBytes(Paths.get(folder, "Backups", filename));
             fileOutputStream = new FileOutputStream(Config.getProperty("producerJSON"));
             fileOutputStream.write(producerJSON);
-
-
-
 
 
             path = Paths.get(Config.getProperty("genreJSON"));
             filename = path.getFileName().toString();
             folder = path.getParent().toString();
 
-
-
-            byte[] genreJSON = Files.readAllBytes(Paths.get(folder, "backup", filename));
+            byte[] genreJSON = Files.readAllBytes(Paths.get(folder, "Backups", filename));
             fileOutputStream = new FileOutputStream(Config.getProperty("genreJSON"));
             fileOutputStream.write(genreJSON);
 

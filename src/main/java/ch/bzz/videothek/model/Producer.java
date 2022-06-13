@@ -22,8 +22,9 @@ public class Producer {
     @Size(min=3, max=60)
     private String producer;
 
-    @JsonIgnore
-    private List<Film> filmList;
+    //@JsonIgnore
+    @FormParam("filmList")
+    private List<String> filmList;
 
     /**
      * gets the producerUUID
@@ -61,7 +62,7 @@ public class Producer {
      * gets the filmList
      * @return filmList
      */
-    public List<Film> getFilmList() {
+    public List<String> getFilmList() {
         return filmList;
     }
 
@@ -69,7 +70,7 @@ public class Producer {
      * sets the filmList
      * @param filmList
      */
-    public void setFilmList(List<Film> filmList) {
+    public void setFilmList(List<String> filmList) {
         this.filmList = filmList;
     }
 }

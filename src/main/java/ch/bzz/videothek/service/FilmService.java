@@ -53,20 +53,25 @@ public class FilmService {
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String filmUUID
     ){
-        if (filmUUID.isEmpty()){
-            new IllegalArgumentException("illegal uuid");
-            return Response.status(400).entity(null).build();
-        }else {
-            Film film = DataHandler.readFilmByUUID(filmUUID);
-            if (film!=null) {
-                return Response
-                        .status(200)
-                        .entity(film)
-                        .build();
-            }else {
-                return Response.status(404).entity(film).build();
+        Film film = null;
+        int httpStatus;
+
+        try {
+            film = DataHandler.readFilmByUUID(filmUUID);
+            if (film == null){
+                httpStatus = 404;
+            } else {
+                httpStatus = 200;
             }
+        } catch (IllegalArgumentException argEx){
+            httpStatus = 400;
         }
+
+        return Response
+                .status(httpStatus)
+                .entity(film)
+                .build();
+
     }
 
     /**
@@ -88,21 +93,6 @@ public class FilmService {
             httpStatus = 410;
         }
 
-        /*
-        if (!filmUUID.isEmpty()){
-
-            if (DataHandler.readFilmByUUID(filmUUID)!=null){
-                DataHandler.deleteFilm(filmUUID);
-                httpStatus = 200;
-            }else {
-                httpStatus = 404;
-            }
-
-        }else {
-            httpStatus = 400;
-        }
-        */
-
         Response response = Response
                 .status(httpStatus)
                 .entity("")
@@ -112,8 +102,6 @@ public class FilmService {
 
     /**
      * updates a new film
-     * @param producerUUID the uuid of the producer
-     * @param genreUUID the uuid of the genre
      * @return Response
      */
     @PUT
@@ -121,22 +109,20 @@ public class FilmService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateFilm(
             @Valid @BeanParam Film film,
-            @FormParam("producerUUID") String producerUUID,
-            @FormParam("genreUUID") String genreUUID
+            @FormParam("filmUUID") String filmUUID
     ){
         int httpStatus = 200;
-        Film oldFilm = DataHandler.readFilmByUUID(film.getFilmUUID());
+        Film oldFilm = DataHandler.readFilmByUUID(filmUUID); //maybe film.getFilmUUID
+
         if (oldFilm!=null){
-            setAttributes(
-                    oldFilm,
-                    film.getTitle(),
-                    film.getProducerUUID(),
-                    film.getGenreUUID(),
-                    film.getPrice(),
-                    film.getPublishDate(),
-                    film.getLenth(),
-                    film.getEan()
-            );
+            oldFilm.setTitle(film.getTitle());
+            oldFilm.setProducer(film.getProducer());
+            oldFilm.setGenre(film.getGenre());
+            oldFilm.setPublishDate(film.getPublishDate());
+            oldFilm.setPrice(film.getPrice());
+            oldFilm.setLenth(film.getLenth());
+            oldFilm.setEan(film.getEan());
+
             DataHandler.updateFilm();
 
         }else {
@@ -166,7 +152,8 @@ public class FilmService {
     ){
         int httpStatus = 200;
         film.setFilmUUID(UUID.randomUUID().toString());
-
+        film.setProducerUUID(producerUUID);
+        film.setGenreUUID(genreUUID);
         DataHandler.insertFilm(film);
 
         Response response = Response
@@ -176,35 +163,5 @@ public class FilmService {
         return response;
     }
 
-    /**
-     * sets the attributes for the film-object
-     * @param film the film
-     * @param title the title
-     * @param producerUUID the producerUUID
-     * @param genreUUID the genreUUID
-     * @param price the price
-     * @param publishDate the release date
-     * @param lenth the lenth
-     * @param ean the ean
-     */
-    private void setAttributes(
-            Film film,
-            String title,
-            String producerUUID,
-            String genreUUID,
-            BigDecimal price,
-            LocalDate publishDate,
-            Integer lenth,
-            String ean
-
-    ) {
-        film.setTitle(title);
-        film.setProducerUUID(producerUUID);
-        film.setGenreUUID(genreUUID);
-        film.setPrice(price);
-        film.setPublishDate(publishDate);
-        film.setLenth(lenth);
-        film.setEan(ean);
-    }
 
 }
