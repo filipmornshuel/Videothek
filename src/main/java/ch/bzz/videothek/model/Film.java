@@ -20,7 +20,8 @@ import java.time.LocalDate;
  */
 
 public class Film {
-    //Maybe it causes an error... to DO!
+    //@Pattern(regexp="[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+
     @FormParam("filmUUID")
     @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String filmUUID;
@@ -31,10 +32,13 @@ public class Film {
     private String title;
 
     @FormParam("producerUUID")
+    @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String producerUUID;
 
     @FormParam("genreUUID")
+    @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String genreUUID;
+
 
     @JsonIgnore
     private Producer producer;
@@ -42,7 +46,6 @@ public class Film {
     @JsonIgnore
     private Genre genre;
 
-    @FormParam("publishDate")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -60,7 +63,7 @@ public class Film {
 
     @FormParam("ean")
     @NotEmpty
-    @Pattern(regexp = "[0-9]{13}") // or /^[0-9]{13}$/gm also possible
+    @Pattern(regexp = "[4-5]{1}[0-7]{3}[0-4]{3}[0-9]{6}")
     private String ean;
 
     /**
@@ -185,6 +188,10 @@ public class Film {
         this.publishDate = publishDate;
     }
 
+    /**
+     * sets the publishDate with a string
+     * @param publish
+     */
     public void setPublishDateWithString(String publish){
         this.publishDate = LocalDate.parse(publish);
     }

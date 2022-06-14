@@ -22,9 +22,8 @@ public class Producer {
     @Size(min=3, max=60)
     private String producer;
 
-    //@JsonIgnore
     @FormParam("filmList")
-    private List<String> filmList;
+    private List<@Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}") String> filmList;
 
     /**
      * gets the producerUUID

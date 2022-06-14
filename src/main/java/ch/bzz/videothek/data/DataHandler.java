@@ -34,6 +34,9 @@ public class DataHandler {
         
     }
 
+    /**
+     * sets the diffrent lists in a method
+     */
     public static void initLists(){
         DataHandler.setFilmList(null);
         DataHandler.setProducerList(null);

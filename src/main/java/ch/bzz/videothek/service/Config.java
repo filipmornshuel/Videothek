@@ -1,5 +1,8 @@
 package ch.bzz.videothek.service;
 
+import ch.bzz.videothek.util.LocalDateDeserializer;
+import ch.bzz.videothek.util.LocalDateSerializer;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.io.FileInputStream;

@@ -109,7 +109,10 @@ public class FilmService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateFilm(
             @Valid @BeanParam Film film,
+            @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
+            //@Pattern(regexp="[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
             @FormParam("filmUUID") String filmUUID
+
     ){
         int httpStatus = 200;
         Film oldFilm = DataHandler.readFilmByUUID(filmUUID); //maybe film.getFilmUUID
@@ -118,6 +121,8 @@ public class FilmService {
             oldFilm.setTitle(film.getTitle());
             oldFilm.setProducer(film.getProducer());
             oldFilm.setGenre(film.getGenre());
+            //oldFilm.setProducerUUID(producerUUID);
+            //oldFilm.setGenreUUID(genreUUID);
             oldFilm.setPublishDate(film.getPublishDate());
             oldFilm.setPrice(film.getPrice());
             oldFilm.setLenth(film.getLenth());
