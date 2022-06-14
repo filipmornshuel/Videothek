@@ -2,65 +2,41 @@
  {
   "filmUUID": "3247c340-c712-402e-b400-0a23a9368c97",
   "title": "Spider-Man NWH",
-  "producer": {
-    "producerUUID": "ecd86148-5341-43c6-81ed-f3f4595965dc",
-    "producer": "Sony Pictures Germany"
-    },
-  "genre": {
-  "genreUUID": "505dd5b5-7cde-2f35-24d1-fgf5c5432262",
-  "genre": "Action"
-    },
+  "producerUUID": "ecd86148-5341-43c6-81ed-f3f4595965dc",
+  "genreUUID": "43b90b64-70e6-4c3f-a4f5-d20c73d0345d",
   "price": 29.95,
   "publishDate": "2021-12-14",
   "lenth": 160,
-  "ean": "4030521759138"
+  "ean": "4030421759138"
  },
  {
   "filmUUID": "db117daa-e295-4597-abcd-a69496797dc0",
   "title": "Spider-Man FRH",
-  "producer": {
   "producerUUID": "606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
-  "producer": "Marvel"
-   },
-  "genre": {
-  "genreUUID": "elg83128-1321-34d6-18fe-g3g548412345",
-  "genre": "Horror"
-   },  
+  "genreUUID": "11aadd2d-fcb2-43ec-846b-eb82a438d030",  
   "price": 31.95,
   "publishDate": "2018-08-23",
   "lenth": 140,
-  "ean": "4030521755963"
+  "ean": "4030421755963"
  },
  {
   "filmUUID": "c746a291-0ef9-4b2a-8268-392b12d636bd",
   "title": "Spider-Man HC",
-  "producer": {
   "producerUUID": "06fc334d-7b02-434f-9222-6544d30d8832",
-  "producer": "Bloomhouse"
-    },
-  "genre": {
   "genreUUID": "05de223e-2c03-235d-9111-4456e40f3321",
-  "genre": "Science Fiction"
-    },
   "price": 18.95,
   "publishDate": "2017-11-23",
   "lenth": 128,
-  "ean": "4030521747913"
+  "ean": "4030421747913"
  },
  {
   "filmUUID": "73bd4187-a5b7-4864-be79-327bb8ed43bf",
   "title": "The Amazing Spider-Man 1",
-  "producer": {
-    "producerUUID": "ecd86148-5341-43c6-81ed-f3f4595965dc",
-    "producer": "Sony Pictures Germany"
-    },
-  "genre": {
+  "producerUUID": "ecd86148-5341-43c6-81ed-f3f4595965dc",
   "genreUUID": "05de223e-2c03-235d-9111-4456e40f3321",
-  "genre": "Science Fiction"
-    },
   "price": 12.5,
   "publishDate": "2012-07-17",
   "lenth": 158,
-  "ean": "4030521737457"
+  "ean": "4030421737457"
  }
 ]

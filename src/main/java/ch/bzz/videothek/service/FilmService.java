@@ -110,20 +110,19 @@ public class FilmService {
     public Response updateFilm(
             @Valid @BeanParam Film film,
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            //@Pattern(regexp="[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
-            @FormParam("filmUUID") String filmUUID
+            @FormParam("filmUUID") String filmUUID,
+            @Pattern(regexp="\\d{4}-(0[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])")
+            @FormParam("publishDate") String publishDate
 
     ){
         int httpStatus = 200;
-        Film oldFilm = DataHandler.readFilmByUUID(filmUUID); //maybe film.getFilmUUID
+        Film oldFilm = DataHandler.readFilmByUUID(filmUUID);
 
         if (oldFilm!=null){
             oldFilm.setTitle(film.getTitle());
             oldFilm.setProducer(film.getProducer());
             oldFilm.setGenre(film.getGenre());
-            //oldFilm.setProducerUUID(producerUUID);
-            //oldFilm.setGenreUUID(genreUUID);
-            oldFilm.setPublishDate(film.getPublishDate());
+            oldFilm.setPublishDateWithString(publishDate);
             oldFilm.setPrice(film.getPrice());
             oldFilm.setLenth(film.getLenth());
             oldFilm.setEan(film.getEan());
@@ -153,12 +152,15 @@ public class FilmService {
     public Response createFilm(
             @Valid @BeanParam Film film,
             @FormParam("producerUUID") String producerUUID,
-            @FormParam("genreUUID") String genreUUID
+            @FormParam("genreUUID") String genreUUID,
+            @Pattern(regexp="\\d{4}-(0[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])")
+            @FormParam("publishDate") String publishDate
     ){
         int httpStatus = 200;
         film.setFilmUUID(UUID.randomUUID().toString());
         film.setProducerUUID(producerUUID);
         film.setGenreUUID(genreUUID);
+        film.setPublishDateWithString(publishDate);
         DataHandler.insertFilm(film);
 
         Response response = Response
