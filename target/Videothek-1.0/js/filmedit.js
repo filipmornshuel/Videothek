@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     readGenres();
     readFilm();
 
-    document.getElementById("save").addEventListener("submit", saveFilm);
+    document.getElementById("filmeditForm").addEventListener("submit", saveFilm);
     document.getElementById("cancel").addEventListener("click", cancelEdit);
 });
 
@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
  * saves the data of a film
  */
 function saveFilm(event) {
-    window.location.href = "./videothek.html";
     event.preventDefault();
 
     const filmForm = document.getElementById("filmeditForm");
@@ -84,8 +83,8 @@ function showFilm(data) {
     document.getElementById("title").value = data.title;
     document.getElementById("producer").value = data.producerUUID;
     document.getElementById("genre").value = data.genreUUID;
-    document.getElementById("price").value = data.price;
     document.getElementById("publishDate").value = data.publishDate;
+    document.getElementById("price").value = data.price;
     document.getElementById("lenth").value = data.lenth;
     document.getElementById("ean").value = data.ean;
 }
@@ -130,7 +129,6 @@ function showProducers(data) {
  * reads all genres as an array
  */
 function readGenres() {
-
     fetch("./resource/genre/list")
         .then(function (response) {
             if (response.ok) {

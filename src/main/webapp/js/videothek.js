@@ -38,8 +38,8 @@ function showFilmlist(data) {
         row.insertCell(-1).innerHTML = film.title;
         row.insertCell(-1).innerHTML = film.producer.producer;
         row.insertCell(-1).innerHTML = film.genre.genre;
-        row.insertCell(-1).innerHTML = film.price;
         row.insertCell(-1).innerHTML = film.publishDate;
+        row.insertCell(-1).innerHTML = film.price;
         row.insertCell(-1).innerHTML = film.lenth;
         row.insertCell(-1).innerHTML = film.ean;
 
