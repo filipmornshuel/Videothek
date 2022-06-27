@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="Filip Slavkovic"/>
+    <meta name="copyright" content="FG ICT - Bildungszentrum Zürichsee"/>
+    <meta name="project" content="Videothek"/>
+    <meta name="description" content="videothek films list table"/>
     <title>Videothek</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Videothek</h1>
+<nav id="nav">
+    <span id="message" style="color: red;"></span>
+</nav>
+<h3>Anmeldung</h3>
+<form id="loginForm">
+    <table>
+        <tr>
+            <td><label for="username">Benutzername</label></td>
+            <td><input id="username" name="username" type="text"/>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td><input id="password" name="password" type="password"/>
+        </tr>
+        <tr>
+            <td>
+                <button id="login" type="submit">Anmelden</button>
+            </td>
+        </tr>
+    </table>
+
+</form>
 </body>
+<script src="./js/videothek.js"></script>
+<script src="./js/js.cookie.js"></script>
+<script src="./js/login.js"></script>
 </html>
