@@ -1,9 +1,11 @@
 /**
- * view-controller for videothek.html
+ * view-controller for filmList.html
  * @author Filip Slavkovic
  */
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("test");
     readFilms();
+    console.log("test2");
 });
 
 /**
@@ -33,13 +35,55 @@ function readFilms() {
  */
 function showFilmlist(data) {
     let tBody = document.getElementById("filmlist");
+
+
+
     data.forEach(film => {
+        /*
+        let tempProducer = null;
+        let tempGenre = null;
+
+        fetch("./resource/producer/read?producerUUID=" + film.producerUUID)
+            .then(function (response) {
+                if (response.ok) {
+                    return response;
+                } else {
+                    console.log(response);
+                }
+            })
+            .then(response => response.json())
+            .then(producer => {
+                tempProducer = producer;
+                console.log(producer);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        fetch("./resource/genre/read?genreUUID=" + film.genreUUID)
+            .then(function (response) {
+                if (response.ok) {
+                    return response;
+                } else {
+                    console.log(response);
+                }
+            })
+            .then(response => response.json())
+            .then(genre => {
+                tempGenre = genre;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+         */
+
         let row = tBody.insertRow(-1);
         row.insertCell(-1).innerHTML = film.title;
         row.insertCell(-1).innerHTML = film.producer.producer;
         row.insertCell(-1).innerHTML = film.genre.genre;
-        row.insertCell(-1).innerHTML = film.price;
         row.insertCell(-1).innerHTML = film.publishDate;
+        row.insertCell(-1).innerHTML = film.price;
         row.insertCell(-1).innerHTML = film.lenth;
         row.insertCell(-1).innerHTML = film.ean;
 
@@ -69,7 +113,7 @@ function showFilmlist(data) {
 function editFilm(event) {
     const button = event.target;
     const filmUUID = button.getAttribute("data-filmuuid");
-    window.location.href = "./filmedit.html?uuid=" + filmUUID;
+    window.location.href = "./filmedit.html?filmUUID=" + filmUUID;
 }
 
 /**
@@ -80,13 +124,13 @@ function deleteFilm(event) {
     const button = event.target;
     const filmUUID = button.getAttribute("data-filmuuid");
 
-    fetch("./resource/film/delete?uuid=" + filmUUID,
+    fetch("./resource/film/delete?filmUUID=" + filmUUID,
         {
             method: "DELETE"
         })
         .then(function (response) {
             if (response.ok) {
-                window.location.href = "./videothek.html";
+                window.location.href = "./filmList.html";
             } else {
                 console.log(response);
             }
@@ -94,4 +138,6 @@ function deleteFilm(event) {
         .catch(function (error) {
             console.log(error);
         });
+
+
 }

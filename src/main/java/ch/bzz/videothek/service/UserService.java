@@ -20,6 +20,12 @@ import java.awt.*;
 @Path("user")
 public class UserService {
 
+    /**
+     * a login for videothek
+     * @param username
+     * @param password
+     * @return Response as JSON
+     */
     @POST
     @Path("login")
     @Produces(MediaType.TEXT_PLAIN)
@@ -35,7 +41,7 @@ public class UserService {
             httpStatus =200;
         }
         NewCookie cookie = new NewCookie(
-                "userRole",
+                "role",
                 user.getRole(),
                 "/",
                 "",
@@ -52,6 +58,10 @@ public class UserService {
         return response;
     }
 
+    /**
+     * a logoff for videothek
+     * @return Response as JSON
+     */
     @DELETE
     @Path("logoff")
     @Produces(MediaType.TEXT_PLAIN)

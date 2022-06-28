@@ -2,13 +2,26 @@
  * view-controller for filmedit.html
  * @author Filip Slavkovic
  */
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
     readProducers();
     readGenres();
     readFilm();
 
-    document.getElementById("filmeditForm").addEventListener("submit", saveFilm);
+    //document.getElementById("filmeditForm").addEventListener("submit", saveFilm);
+    /**
     document.getElementById("cancel").addEventListener("click", cancelEdit);
+    $(document).ready(function (){
+        document.getElementById("filmeditForm").addEventListener("submit", saveFilm);
+
+    });
+     */
+    $(document).ready(function (){
+        $("#filmeditForm").submit(saveFilm);
+        $("#cancel").click(cancelEdit);
+    });
 });
 
 /**
@@ -17,13 +30,14 @@ document.addEventListener("DOMContentLoaded", () => {
 function saveFilm(event) {
     event.preventDefault();
 
-    const filmForm = document.getElementById("filmeditForm");
-    const formData = new FormData(filmForm);
+    const filmEditForm = document.getElementById("filmeditForm");
+    const formData = new FormData(filmEditForm);
     const data = new URLSearchParams(formData);
+    console.log(data);
 
     let method;
     let url = "./resource/film/";
-    const filmUUID = getQueryParam("uuid");
+    const filmUUID = getQueryParam("filmUUID");
     if (filmUUID == null) {
         method = "POST";
         url += "create";
@@ -32,6 +46,20 @@ function saveFilm(event) {
         url += "update";
     }
 
+    $
+        .ajax({
+            url: url,
+            dataType: "text",
+            type: method,
+            data: $("#filmeditForm").serialize()
+        })
+        .done(function (){
+            window.location.href = "./filmList.html";
+        })
+        .fail(function (error){
+            console.log(error)
+        })
+    /*
     fetch(url,
         {
             method: method,
@@ -43,12 +71,15 @@ function saveFilm(event) {
         .then(function (response) {
             if (!response.ok) {
                 console.log(response);
-            } else return response;
+            } else{
+                //window.location.href = "./filmList.html";
+                return response;
+            }
         })
-        .then()
         .catch(function (error) {
             console.log(error);
         });
+     */
 
 }
 
@@ -56,8 +87,8 @@ function saveFilm(event) {
  * reads a film
  */
 function readFilm() {
-    const filmUUID = getQueryParam("uuid");
-    fetch("./resource/film/read?uuid=" + filmUUID)
+    const filmUUID = getQueryParam("filmUUID");
+    fetch("./resource/film/read?filmUUID=" + filmUUID)
         .then(function (response) {
             if (response.ok) {
                 return response;
@@ -165,5 +196,5 @@ function showGenres(data) {
  * @param event  the click-event
  */
 function cancelEdit(event) {
-    window.location.href = "./videothek.html";
+    window.location.href = "./filmList.html";
 }

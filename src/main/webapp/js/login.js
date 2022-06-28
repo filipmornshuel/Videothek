@@ -1,7 +1,6 @@
 
 
 $(document).ready(function (){
-
     $("#loginForm").submit(sendLogin);
     $("#logoff").click(sendLogoff);
 });
@@ -17,7 +16,7 @@ function sendLogin(form){
             data: $("#loginForm").serialize()
         })
         .done(function (){
-            window.location.href = "./videothek.html";
+            window.location.href = "./filmList.html";
         })
         .fail(function (xhr, status, errorThrown){
             if (xhr.status == 404){

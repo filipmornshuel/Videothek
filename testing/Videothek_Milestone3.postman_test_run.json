@@ -1,0 +1,762 @@
+{
+	"id": "223aede8-0f70-4ab7-9e90-35141784af2b",
+	"name": "Videothek_Milestone3",
+	"timestamp": "2022-06-28T21:37:03.414Z",
+	"collection_id": "08a33b13-9a59-4c58-a926-75caa8027aeb",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 24,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "0482354a-ae4f-48d0-bf60-9fca81852f30",
+			"name": "1.1 Login",
+			"url": "http://localhost:8080/Videothek-1.0/resource/user/login",
+			"time": 30,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				30
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "96209c34-3457-4d85-aaf3-97f1465c67fd",
+			"name": "1.1.1 delete film",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/delete?filmUUID=db117daa-e295-4597-abcd-a69496797dc0",
+			"time": 17,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "b4b4456a-2b8b-49c7-bdcf-caae98b0a4da",
+			"name": "1.2.1 insert film",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/create",
+			"time": 9,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "44aecb27-b6f1-457e-a2fb-dc8370d5121f",
+			"name": "1.3.1 update film",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/update",
+			"time": 41,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				41
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "58393ef7-079f-4374-a9be-897766ab6f82",
+			"name": "2.1.1 delete producer",
+			"url": "http://localhost:8080/Videothek-1.0/resource/producer/delete?producerUUID=06fc334d-7b02-434f-9222-6544d30d8832",
+			"time": 12,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "837c156c-6649-4b3e-abdd-d717d927ff42",
+			"name": "2.2.1 insert producer",
+			"url": "http://localhost:8080/Videothek-1.0/resource/producer/create",
+			"time": 12,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "8b326349-4b36-4f33-becb-a413300c99af",
+			"name": "2.3.1 update producer",
+			"url": "http://localhost:8080/Videothek-1.0/resource/producer/update",
+			"time": 16,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "9b6eae36-6bd1-4b03-9e09-c2d226ca8e9e",
+			"name": "3.1.1 delete genre",
+			"url": "http://localhost:8080/Videothek-1.0/resource/genre/delete?genreUUID=43b90b64-70e6-4c3f-a4f5-d20c73d0345d",
+			"time": 15,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				15
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "a19634d4-900a-4aa4-bf6c-cdeda7423137",
+			"name": "3.2.1 insert genre",
+			"url": "http://localhost:8080/Videothek-1.0/resource/genre/create",
+			"time": 30,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				30
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "ee1c0498-044e-4aed-9ebe-0ad4f95a31e8",
+			"name": "3.3.1 update genre",
+			"url": "http://localhost:8080/Videothek-1.0/resource/genre/update",
+			"time": 24,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				24
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "519cc6d7-d1ef-4dc5-867d-f58d61c11e15",
+			"name": "1.2 List",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/list",
+			"time": 15,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				15
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "5f59c1e9-d882-4100-aa59-4ed7f5b9c6ac",
+			"name": "1.2 Login failed",
+			"url": "http://localhost:8080/Videothek-1.0/resource/user/login",
+			"time": 45,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				45
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "bea86ae9-17c5-4bfb-b621-e9297588ba1f",
+			"name": "1.1 Login",
+			"url": "http://localhost:8080/Videothek-1.0/resource/user/login",
+			"time": 19,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				19
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "5d8dbd7b-2f8c-4dd8-b786-4f86d3bc1db7",
+			"name": "1.1.1 delete film",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/delete?filmUUID=db117daa-e295-4597-abcd-a69496797dc0",
+			"time": 12,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "47662524-c7ca-47c9-ad27-0886991f911f",
+			"name": "1.2.1 insert film",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/create",
+			"time": 21,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				21
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "c07c4364-118d-4c0f-a293-2c3fed8bdd0c",
+			"name": "1.3.1 update film",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/update",
+			"time": 13,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "7656a956-aae4-43f5-909e-a2ab77c2fb63",
+			"name": "2.1.1 delete producer",
+			"url": "http://localhost:8080/Videothek-1.0/resource/producer/delete?producerUUID=06fc334d-7b02-434f-9222-6544d30d8832",
+			"time": 16,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "20cda12f-d6fb-453f-92e3-80e0186ac315",
+			"name": "2.2.1 insert producer",
+			"url": "http://localhost:8080/Videothek-1.0/resource/producer/create",
+			"time": 9,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "cf687120-4ed5-4e1c-b800-3609fda1e67c",
+			"name": "2.3.1 update producer",
+			"url": "http://localhost:8080/Videothek-1.0/resource/producer/update",
+			"time": 25,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				25
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "b92cca09-8b60-4a55-9a43-bd7c9f30808f",
+			"name": "3.1.1 delete genre",
+			"url": "http://localhost:8080/Videothek-1.0/resource/genre/delete?genreUUID=43b90b64-70e6-4c3f-a4f5-d20c73d0345d",
+			"time": 25,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				25
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "ed89e03a-2eb8-4d57-a065-f3e4b853da5e",
+			"name": "3.2.1 insert genre",
+			"url": "http://localhost:8080/Videothek-1.0/resource/genre/create",
+			"time": 32,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				32
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "b9e63449-c5af-4543-9dd4-5224d1e8531a",
+			"name": "3.3.1 update genre",
+			"url": "http://localhost:8080/Videothek-1.0/resource/genre/update",
+			"time": 22,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "0c56f4d3-c99a-48ba-9c99-954ecd89ac3b",
+			"name": "1.2 List",
+			"url": "http://localhost:8080/Videothek-1.0/resource/film/list",
+			"time": 26,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				26
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "db2ff452-4379-406c-aad9-0fe91b9f186a",
+			"name": "1.2 Login failed",
+			"url": "http://localhost:8080/Videothek-1.0/resource/user/login",
+			"time": 16,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 502,
+	"collection": {
+		"requests": [
+			{
+				"id": "0482354a-ae4f-48d0-bf60-9fca81852f30",
+				"method": "POST"
+			},
+			{
+				"id": "96209c34-3457-4d85-aaf3-97f1465c67fd",
+				"method": "DELETE"
+			},
+			{
+				"id": "b4b4456a-2b8b-49c7-bdcf-caae98b0a4da",
+				"method": "POST"
+			},
+			{
+				"id": "44aecb27-b6f1-457e-a2fb-dc8370d5121f",
+				"method": "PUT"
+			},
+			{
+				"id": "58393ef7-079f-4374-a9be-897766ab6f82",
+				"method": "DELETE"
+			},
+			{
+				"id": "837c156c-6649-4b3e-abdd-d717d927ff42",
+				"method": "POST"
+			},
+			{
+				"id": "8b326349-4b36-4f33-becb-a413300c99af",
+				"method": "PUT"
+			},
+			{
+				"id": "9b6eae36-6bd1-4b03-9e09-c2d226ca8e9e",
+				"method": "DELETE"
+			},
+			{
+				"id": "a19634d4-900a-4aa4-bf6c-cdeda7423137",
+				"method": "POST"
+			},
+			{
+				"id": "ee1c0498-044e-4aed-9ebe-0ad4f95a31e8",
+				"method": "PUT"
+			},
+			{
+				"id": "519cc6d7-d1ef-4dc5-867d-f58d61c11e15",
+				"method": "GET"
+			},
+			{
+				"id": "5f59c1e9-d882-4100-aa59-4ed7f5b9c6ac",
+				"method": "POST"
+			},
+			{
+				"id": "bea86ae9-17c5-4bfb-b621-e9297588ba1f",
+				"method": "POST"
+			},
+			{
+				"id": "5d8dbd7b-2f8c-4dd8-b786-4f86d3bc1db7",
+				"method": "DELETE"
+			},
+			{
+				"id": "47662524-c7ca-47c9-ad27-0886991f911f",
+				"method": "POST"
+			},
+			{
+				"id": "c07c4364-118d-4c0f-a293-2c3fed8bdd0c",
+				"method": "PUT"
+			},
+			{
+				"id": "7656a956-aae4-43f5-909e-a2ab77c2fb63",
+				"method": "DELETE"
+			},
+			{
+				"id": "20cda12f-d6fb-453f-92e3-80e0186ac315",
+				"method": "POST"
+			},
+			{
+				"id": "cf687120-4ed5-4e1c-b800-3609fda1e67c",
+				"method": "PUT"
+			},
+			{
+				"id": "b92cca09-8b60-4a55-9a43-bd7c9f30808f",
+				"method": "DELETE"
+			},
+			{
+				"id": "ed89e03a-2eb8-4d57-a065-f3e4b853da5e",
+				"method": "POST"
+			},
+			{
+				"id": "b9e63449-c5af-4543-9dd4-5224d1e8531a",
+				"method": "PUT"
+			},
+			{
+				"id": "0c56f4d3-c99a-48ba-9c99-954ecd89ac3b",
+				"method": "GET"
+			},
+			{
+				"id": "db2ff452-4379-406c-aad9-0fe91b9f186a",
+				"method": "POST"
+			}
+		]
+	}
+}

@@ -4,6 +4,7 @@ import ch.bzz.videothek.data.DataHandler;
 import ch.bzz.videothek.model.Film;
 import ch.bzz.videothek.model.Genre;
 import ch.bzz.videothek.model.Producer;
+import ch.bzz.videothek.util.AESEncrypt;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -29,10 +30,19 @@ public class GenreService {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listGenres() {
+    public Response listGenres(
+            @CookieParam("role") String userRole
+    ) {
+        int httpStatus = 200;
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
+        if (userRole==null||userRole.equals("guest")){
+            httpStatus = 403;
+        }
         List<Genre> genreList = DataHandler.readAllGenres();
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity(genreList)
                 .build();
     }
@@ -48,23 +58,32 @@ public class GenreService {
     public Response readGenre(
             @NotEmpty
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("uuid") String genreUUID
+            @QueryParam("genreUUID") String genreUUID,
+            @CookieParam("role") String userRole
     ){
         Genre genre = null;
-        int status;
-        try {
-            genre = DataHandler.readGenresByUUID(genreUUID);
-            if (genre == null){
-                status = 404;
-            }else {
-                status = 200;
+        int httpStatus = 200;
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
+        if (userRole==null||userRole.equals("guest")){
+            httpStatus = 403;
+        }
+        else {
+            try {
+                genre = DataHandler.readGenresByUUID(genreUUID);
+                if (genre == null){
+                    httpStatus = 404;
+                }else {
+                    httpStatus = 200;
+                }
+            }catch (IllegalArgumentException argEx){
+                httpStatus = 400;
             }
-        }catch (IllegalArgumentException argEx){
-            status = 400;
         }
 
         return Response
-                .status(status)
+                .status(httpStatus)
                 .entity(genre)
                 .build();
     }
@@ -80,14 +99,20 @@ public class GenreService {
     public Response deleteGenre(
             @NotEmpty
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("uuid") String genreUUID
+            @QueryParam("genreUUID") String genreUUID,
+            @CookieParam("role") String userRole
     ){
         int httpStatus = 200;
-
-        if (!DataHandler.deleteGenre(genreUUID)){
-            httpStatus = 410;
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
         }
-
+        if (userRole != null && userRole.equals("admin")){
+            if (!DataHandler.deleteGenre(genreUUID)){
+                httpStatus = 410;
+            }
+        }else {
+            httpStatus = 403;
+        }
         Response response = Response
                 .status(httpStatus)
                 .entity("")
@@ -104,16 +129,25 @@ public class GenreService {
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateGenre(
-            @Valid @BeanParam Genre genre
+            @Valid @BeanParam Genre genre,
+            @CookieParam("role") String userRole
     ){
         int httpStatus = 200;
-        Genre oldGenre = DataHandler.readGenresByUUID(genre.getGenreUUID());
-        if (oldGenre!=null){
-           oldGenre.setGenre(genre.getGenre());
 
-            DataHandler.updateGenre();
-        }else {
-            httpStatus =410;
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
+
+        if (userRole != null && userRole.equals("admin")){
+            Genre oldGenre = DataHandler.readGenresByUUID(genre.getGenreUUID());
+            if (oldGenre!=null){
+                oldGenre.setGenre(genre.getGenre());
+                DataHandler.updateGenre();
+            }else {
+                httpStatus =410;
+            }
+        }else{
+            httpStatus = 403;
         }
 
         Response response = Response
@@ -132,12 +166,21 @@ public class GenreService {
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
     public Response createGenre(
-           @Valid @BeanParam Genre genre
+           @Valid @BeanParam Genre genre,
+           @CookieParam("role") String userRole
     ){
         int httpStatus = 200;
-        genre.setGenreUUID(UUID.randomUUID().toString());
 
-        DataHandler.insertGenre(genre);
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
+
+        if (userRole != null && userRole.equals("admin")){
+            genre.setGenreUUID(UUID.randomUUID().toString());
+            DataHandler.insertGenre(genre);
+        }else {
+            httpStatus = 403;
+        }
 
         Response response = Response
                 .status(httpStatus)

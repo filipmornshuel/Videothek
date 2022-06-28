@@ -29,6 +29,10 @@ public class UserData {
         return user;
     }
 
+    /**
+     * reads the json file
+     * @return userList as user
+     */
     private static List<User> readJSON(){
         List<User> userList = new ArrayList<>();
         try{

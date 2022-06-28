@@ -4,6 +4,7 @@ import ch.bzz.videothek.data.DataHandler;
 import ch.bzz.videothek.model.Film;
 import ch.bzz.videothek.model.Genre;
 import ch.bzz.videothek.model.Producer;
+import ch.bzz.videothek.util.AESEncrypt;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -28,10 +29,19 @@ public class ProducerService {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listProducers() {
+    public Response listProducers(
+            @CookieParam("role") String userRole
+    ) {
+        int httpStatus = 200;
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
+        if (userRole==null||userRole.equals("guest")){
+            httpStatus = 403;
+        }
         List<Producer> producerList = DataHandler.readAllProducers();
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity(producerList)
                 .build();
     }
@@ -47,23 +57,32 @@ public class ProducerService {
     public Response readProducer(
             @NotEmpty
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("uuid") String producerUUID
+            @QueryParam("producerUUID") String producerUUID,
+            @CookieParam("role") String userRole
     ){
         Producer producer = null;
-        int status;
-        try {
-            producer = DataHandler.readProducersByUUID(producerUUID);
-            if (producer == null){
-                status = 404;
-            }else {
-                status = 200;
+        int httpStatus = 200;
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
+        if (userRole==null||userRole.equals("guest")){
+            httpStatus = 403;
+        }
+        else {
+            try {
+                producer = DataHandler.readProducersByUUID(producerUUID);
+                if (producer == null){
+                    httpStatus = 404;
+                }else {
+                    httpStatus = 200;
+                }
+            }catch (IllegalArgumentException argEx){
+                httpStatus = 400;
             }
-        }catch (IllegalArgumentException argEx){
-            status = 400;
         }
 
         return Response
-                .status(status)
+                .status(httpStatus)
                 .entity(producer)
                 .build();
     }
@@ -79,14 +98,20 @@ public class ProducerService {
     public Response deleteProducer(
             @NotEmpty
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("uuid") String producerUUID
+            @QueryParam("producerUUID") String producerUUID,
+            @CookieParam("role") String userRole
     ){
         int httpStatus = 200;
-
-        if (!DataHandler.deleteProducer(producerUUID)){
-            httpStatus = 410;
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
         }
-
+        if (userRole != null && userRole.equals("admin")){
+            if (!DataHandler.deleteProducer(producerUUID)){
+                httpStatus = 410;
+            }
+        }else {
+            httpStatus = 403;
+        }
 
         Response response = Response
                 .status(httpStatus)
@@ -104,18 +129,25 @@ public class ProducerService {
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateProducer(
-            @Valid @BeanParam Producer producer
+            @Valid @BeanParam Producer producer,
+            @CookieParam("role") String userRole
     ){
         int httpStatus = 200;
-        Producer oldProducer = DataHandler.readProducersByUUID(producer.getProducerUUID());
-        if (oldProducer!=null){
-            oldProducer.setProducer(producer.getProducer());
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
+        if (userRole != null && userRole.equals("admin")){
 
-            oldProducer.setFilmList(producer.getFilmList());
-
-            DataHandler.updateProducer();
+            Producer oldProducer = DataHandler.readProducersByUUID(producer.getProducerUUID());
+            if (oldProducer!=null){
+                oldProducer.setProducer(producer.getProducer());
+                oldProducer.setFilmList(producer.getFilmList());
+                DataHandler.updateProducer();
+            }else {
+                httpStatus =410;
+            }
         }else {
-            httpStatus =410;
+            httpStatus = 403;
         }
 
         Response response = Response
@@ -134,12 +166,20 @@ public class ProducerService {
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
     public Response createProducer(
-            @Valid @BeanParam Producer producer
+            @Valid @BeanParam Producer producer,
+            @CookieParam("role") String userRole
     ){
         int httpStatus = 200;
-        producer.setProducerUUID(UUID.randomUUID().toString());
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
 
-        DataHandler.insertProducer(producer);
+        if (userRole != null && userRole.equals("admin")){
+            producer.setProducerUUID(UUID.randomUUID().toString());
+            DataHandler.insertProducer(producer);
+        }else {
+            httpStatus = 403;
+        }
 
         Response response = Response
                 .status(httpStatus)

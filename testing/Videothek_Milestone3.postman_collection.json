@@ -1,0 +1,1309 @@
+{
+	"info": {
+		"_postman_id": "08a33b13-9a59-4c58-a926-75caa8027aeb",
+		"name": "Videothek_Milestone3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login_Admin",
+			"item": [
+				{
+					"name": "1.1 Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "ammanna",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "geheim",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.1.1 delete film",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/film/delete?filmUUID=db117daa-e295-4597-abcd-a69496797dc0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"film",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "filmUUID",
+									"value": "db117daa-e295-4597-abcd-a69496797dc0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.2.1 insert film",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Halloween Kills",
+									"type": "text"
+								},
+								{
+									"key": "producerUUID",
+									"value": "06fc334d-7b02-434f-9222-6544d30d8832",
+									"type": "text"
+								},
+								{
+									"key": "genreUUID",
+									"value": "11aadd2d-fcb2-43ec-846b-eb82a438d030",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "39.95",
+									"type": "text"
+								},
+								{
+									"key": "publishDate",
+									"value": "2022-03-14",
+									"type": "text"
+								},
+								{
+									"key": "lenth",
+									"value": "134",
+									"type": "text"
+								},
+								{
+									"key": "ean",
+									"value": "4505303241308",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/film/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"film",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.3.1 update film",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "filmUUID",
+									"value": "3247c340-c712-402e-b400-0a23a9368c97",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Spider-Man Collection",
+									"type": "text"
+								},
+								{
+									"key": "producerUUID",
+									"value": "ecd86148-5341-43c6-81ed-f3f4595965dc",
+									"type": "text"
+								},
+								{
+									"key": "genreUUID",
+									"value": "43b90b64-70e6-4c3f-a4f5-d20c73d0345d",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "13.90",
+									"type": "text"
+								},
+								{
+									"key": "publishDate",
+									"value": "2013-07-18",
+									"type": "text"
+								},
+								{
+									"key": "lenth",
+									"value": "155",
+									"type": "text"
+								},
+								{
+									"key": "ean",
+									"value": "5053043241312",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/film/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"film",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.1.1 delete producer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/producer/delete?producerUUID=06fc334d-7b02-434f-9222-6544d30d8832",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"producer",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "producerUUID",
+									"value": "06fc334d-7b02-434f-9222-6544d30d8832"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.2.1 insert producer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "producer",
+									"value": "Universal Pictures HD",
+									"type": "text"
+								},
+								{
+									"key": "filmList",
+									"value": "594455b5-a629-4e07-a151-0b7991294d60",
+									"type": "text"
+								},
+								{
+									"key": "filmList",
+									"value": "779f51fd-d9fb-4037-8600-e5eb718f322a",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/producer/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"producer",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.3.1 update producer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "producerUUID",
+									"value": "ecd86148-5341-43c6-81ed-f3f4595965dc",
+									"type": "text"
+								},
+								{
+									"key": "producer",
+									"value": "Universal Deutschland",
+									"type": "text"
+								},
+								{
+									"key": "filmList",
+									"value": "3247c340-c712-402e-b400-0a23a9368c97",
+									"type": "text"
+								},
+								{
+									"key": "filmList",
+									"value": "73bd4187-a5b7-4864-be79-327bb8ed43bf",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/producer/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"producer",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.1.1 delete genre",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/genre/delete?genreUUID=43b90b64-70e6-4c3f-a4f5-d20c73d0345d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"genre",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "genreUUID",
+									"value": "43b90b64-70e6-4c3f-a4f5-d20c73d0345d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.1 insert genre",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "genre",
+									"value": "Fantasy",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/genre/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"genre",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3.1 update genre",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "genreUUID",
+									"value": "11aadd2d-fcb2-43ec-846b-eb82a438d030",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "Dokumentation",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/genre/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"genre",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.2 List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "ammanna",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "geheim",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/film/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"film",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.2 Login failed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "ammanna",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "mornshuel",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login_User",
+			"item": [
+				{
+					"name": "1.1 Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "musterh",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "passwort",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.1.1 delete film",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/film/delete?filmUUID=db117daa-e295-4597-abcd-a69496797dc0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"film",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "filmUUID",
+									"value": "db117daa-e295-4597-abcd-a69496797dc0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.2.1 insert film",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Halloween Kills",
+									"type": "text"
+								},
+								{
+									"key": "producerUUID",
+									"value": "06fc334d-7b02-434f-9222-6544d30d8832",
+									"type": "text"
+								},
+								{
+									"key": "genreUUID",
+									"value": "11aadd2d-fcb2-43ec-846b-eb82a438d030",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "39.95",
+									"type": "text"
+								},
+								{
+									"key": "publishDate",
+									"value": "2022-03-14",
+									"type": "text"
+								},
+								{
+									"key": "lenth",
+									"value": "134",
+									"type": "text"
+								},
+								{
+									"key": "ean",
+									"value": "4505303241308",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/film/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"film",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.3.1 update film",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "filmUUID",
+									"value": "3247c340-c712-402e-b400-0a23a9368c97",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Spider-Man Collection",
+									"type": "text"
+								},
+								{
+									"key": "producerUUID",
+									"value": "ecd86148-5341-43c6-81ed-f3f4595965dc",
+									"type": "text"
+								},
+								{
+									"key": "genreUUID",
+									"value": "43b90b64-70e6-4c3f-a4f5-d20c73d0345d",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "13.90",
+									"type": "text"
+								},
+								{
+									"key": "publishDate",
+									"value": "2013-07-18",
+									"type": "text"
+								},
+								{
+									"key": "lenth",
+									"value": "155",
+									"type": "text"
+								},
+								{
+									"key": "ean",
+									"value": "5053043241312",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/film/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"film",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.1.1 delete producer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/producer/delete?producerUUID=06fc334d-7b02-434f-9222-6544d30d8832",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"producer",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "producerUUID",
+									"value": "06fc334d-7b02-434f-9222-6544d30d8832"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.2.1 insert producer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "producer",
+									"value": "Universal Pictures HD",
+									"type": "text"
+								},
+								{
+									"key": "filmList",
+									"value": "594455b5-a629-4e07-a151-0b7991294d60",
+									"type": "text"
+								},
+								{
+									"key": "filmList",
+									"value": "779f51fd-d9fb-4037-8600-e5eb718f322a",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/producer/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"producer",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.3.1 update producer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "producerUUID",
+									"value": "ecd86148-5341-43c6-81ed-f3f4595965dc",
+									"type": "text"
+								},
+								{
+									"key": "producer",
+									"value": "Universal Deutschland",
+									"type": "text"
+								},
+								{
+									"key": "filmList",
+									"value": "3247c340-c712-402e-b400-0a23a9368c97",
+									"type": "text"
+								},
+								{
+									"key": "filmList",
+									"value": "73bd4187-a5b7-4864-be79-327bb8ed43bf",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/producer/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"producer",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.1.1 delete genre",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/genre/delete?genreUUID=43b90b64-70e6-4c3f-a4f5-d20c73d0345d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"genre",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "genreUUID",
+									"value": "43b90b64-70e6-4c3f-a4f5-d20c73d0345d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.1 insert genre",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "genre",
+									"value": "Fantasy",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/genre/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"genre",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3.1 update genre",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "genreUUID",
+									"value": "11aadd2d-fcb2-43ec-846b-eb82a438d030",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "Dokumentation",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/genre/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"genre",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.2 List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "ammanna",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "geheim",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/film/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"film",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.2 Login failed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "mornshuel",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "passwort",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Videothek-1.0/resource/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Videothek-1.0",
+								"resource",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

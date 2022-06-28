@@ -1,0 +1,14 @@
+[
+  {
+    "userUUID" : "7c7ea8ed-2f4a-4943-9a76-bd19bdf984cf",
+    "username" : "ammanna",
+    "role" : "admin",
+    "password" : "geheim"
+  },
+  {
+    "userUUID" : "8df9f14a-7eff-4c81-8153-172a86c08fe5",
+    "username" : "musterh",
+    "role" : "user",
+    "password" : "passwort"
+  }
+]

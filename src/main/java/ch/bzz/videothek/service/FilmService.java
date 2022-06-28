@@ -2,6 +2,7 @@ package ch.bzz.videothek.service;
 
 import ch.bzz.videothek.data.DataHandler;
 import ch.bzz.videothek.model.Film;
+import ch.bzz.videothek.util.AESEncrypt;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -32,10 +33,21 @@ public class FilmService {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listFilms() {
+    public Response listFilms(
+            @CookieParam("role") String userRole
+    ) {
+        int httpStatus = 200;
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
+        if (userRole==null||userRole.equals("guest")){
+            httpStatus = 403;
+        }
+
+
         List<Film> filmList = DataHandler.readAllFilms();
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity(filmList)
                 .build();
     }
@@ -51,22 +63,30 @@ public class FilmService {
     public Response readFilm(
             @NotEmpty
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("uuid") String filmUUID
+            @QueryParam("filmUUID") String filmUUID,
+            @CookieParam("role") String userRole
     ){
+
         Film film = null;
         int httpStatus;
 
-        try {
-            film = DataHandler.readFilmByUUID(filmUUID);
-            if (film == null){
-                httpStatus = 404;
-            } else {
-                httpStatus = 200;
-            }
-        } catch (IllegalArgumentException argEx){
-            httpStatus = 400;
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
         }
-
+        if (userRole==null||userRole.equals("guest")){
+            httpStatus = 403;
+        }else {
+            try {
+                film = DataHandler.readFilmByUUID(filmUUID);
+                if (film == null){
+                    httpStatus = 404;
+                } else {
+                    httpStatus = 200;
+                }
+            } catch (IllegalArgumentException argEx){
+                httpStatus = 400;
+            }
+        }
         return Response
                 .status(httpStatus)
                 .entity(film)
@@ -85,12 +105,21 @@ public class FilmService {
     public Response deleteFilm(
             @NotEmpty
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("uuid") String filmUUID
+            @QueryParam("filmUUID") String filmUUID,
+            @CookieParam("role") String userRole
     ){
         int httpStatus = 200;
 
-        if (!DataHandler.deleteFilm(filmUUID)){
-            httpStatus = 410;
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
+
+        if (userRole != null && userRole.equals("admin")){
+            if (!DataHandler.deleteFilm(filmUUID)){
+                httpStatus = 410;
+            }
+        }else {
+            httpStatus = 403;
         }
 
         Response response = Response
@@ -112,25 +141,36 @@ public class FilmService {
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @FormParam("filmUUID") String filmUUID,
             @Pattern(regexp="\\d{4}-(0[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])")
-            @FormParam("publishDate") String publishDate
+            @FormParam("publishDate") String publishDate,
+            @CookieParam("role") String userRole
 
     ){
         int httpStatus = 200;
-        Film oldFilm = DataHandler.readFilmByUUID(filmUUID);
 
-        if (oldFilm!=null){
-            oldFilm.setTitle(film.getTitle());
-            oldFilm.setProducer(film.getProducer());
-            oldFilm.setGenre(film.getGenre());
-            oldFilm.setPublishDateWithString(publishDate);
-            oldFilm.setPrice(film.getPrice());
-            oldFilm.setLenth(film.getLenth());
-            oldFilm.setEan(film.getEan());
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
 
-            DataHandler.updateFilm();
+        if (userRole != null && userRole.equals("admin")){
 
+            Film oldFilm = DataHandler.readFilmByUUID(filmUUID);
+
+            if (oldFilm!=null){
+                oldFilm.setTitle(film.getTitle());
+                oldFilm.setProducer(film.getProducer());
+                oldFilm.setGenre(film.getGenre());
+                oldFilm.setPublishDateWithString(publishDate);
+                oldFilm.setPrice(film.getPrice());
+                oldFilm.setLenth(film.getLenth());
+                oldFilm.setEan(film.getEan());
+
+                DataHandler.updateFilm();
+
+            }else {
+                httpStatus =410;
+            }
         }else {
-            httpStatus =410;
+            httpStatus = 403;
         }
 
         Response response = Response
@@ -154,14 +194,23 @@ public class FilmService {
             @FormParam("producerUUID") String producerUUID,
             @FormParam("genreUUID") String genreUUID,
             @Pattern(regexp="\\d{4}-(0[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])")
-            @FormParam("publishDate") String publishDate
+            @FormParam("publishDate") String publishDate,
+            @CookieParam("role") String userRole
     ){
         int httpStatus = 200;
-        film.setFilmUUID(UUID.randomUUID().toString());
-        film.setProducerUUID(producerUUID);
-        film.setGenreUUID(genreUUID);
-        film.setPublishDateWithString(publishDate);
-        DataHandler.insertFilm(film);
+
+        if (userRole!=null){
+            userRole = AESEncrypt.decrypt(userRole);
+        }
+        if (userRole != null && userRole.equals("admin")){
+            film.setFilmUUID(UUID.randomUUID().toString());
+            film.setProducerUUID(producerUUID);
+            film.setGenreUUID(genreUUID);
+            film.setPublishDateWithString(publishDate);
+            DataHandler.insertFilm(film);
+        }else {
+            httpStatus = 403;
+        }
 
         Response response = Response
                 .status(httpStatus)
@@ -169,6 +218,4 @@ public class FilmService {
                 .build();
         return response;
     }
-
-
 }
